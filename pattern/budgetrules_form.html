@@ -1,0 +1,108 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <div class="form" id ='main'>
+      <div class="main formsection" id='form' >
+         <div id='sysmessage'></div>
+           <div class="formtabs">
+             <ul>
+                <li><a class = "lang" href="#basic">basic</a></li>
+                <li><a class = "lang" href="#on_report">on_report</a></li>
+                <li><a class = "lang" href="#schedule">schedule</a></li>
+
+             </ul>
+             <div id="basic">
+                <div name="brid" class="main master  autolabel infofield">{brid}</div>
+                <input class="main autolabel" type="text"  name="name" value="">
+                <input name="brdate" class = 'main datetimebox  autolabel' type="text"  value="">
+                <div  class = 'selectionbox'>
+                  <div id = 'btn-source' type="button"
+                            class = 'dialog button-select'
+                             data-typedialog = 'selectItems'
+                             data-choicemode = 'one'
+                             data-masterfield = 'aid'
+                             data-path = '/accounts_list/'
+                             data-countrows =  8
+                             data-links = ''
+                             data-relationship = '#source'>
+                          <svg><use xlink:href="/file/ico/sprite.svg#three-point"></use>
+                           </div>
+                  <div class = 'selectionbox-label lang flup'>source</div>
+                  <div id = 'source' class = 'selectionvalue' >
+                   <div class = 'row'>
+                     <div name="source" data-asname = 'aid' class="main">{source}</div>
+                     <div name = "sourcename" data-asname = 'aname'>{sourcename}</div>
+                   </div>
+                 </div>
+                </div>
+
+                <div  class = 'selectionbox'>
+                  <div id = 'btn-dest' type="button"
+                          class = 'dialog button-select'
+                           data-typedialog = 'selectItems'
+                         data-choicemode = 'one'
+                           data-masterfield = 'aid'
+                           data-path = '/accounts_list/'
+                           data-countrows =  8
+                           data-links = ''
+                           data-relationship = '#dest'>
+                           <svg><use xlink:href="/file/ico/sprite.svg#three-point"></use>
+                         </div>
+                  <div class = 'selectionbox-label lang flup'>dest</div>
+                  <div id = 'dest' class = 'selectionvalue' >
+                   <div class = 'row'>
+                     <div name="dest" data-asname = 'aid' class="main">{dest}</div>
+                     <div name = "destname" data-asname = 'aname'>{destname}</div>
+                   </div>
+                 </div>
+                </div>
+
+                <input  name="sum" class="main  autolabel"
+                        type="number" step=".01" min="0"
+                        pattern="([^0].?|0[^0])"  value="">
+                <select name="type" class = 'main combobox  autolabel' data-enumerations = 'mode_budgetrule' value=""></select>
+                <input  name="priority" class="main  autolabel" type="number"  value="">
+              <div class="field-box" title="">
+                <label class="lang autonamelab flup">period</label>
+                <select class="main periods combobox" name="rpid" value=""></select>
+              </div>
+             </div>
+             <div id = "on_report">
+               <div class = 'reportbox'>
+                  <div id = 'report' class = 'selectionvalue' >
+                    <div class = 'row'>
+                      <div name="rsid" class="main">{rsid}</div>
+                      <div class = 'reportname' name = "sysname" >{sysname}</div>
+                    </div>
+                  </div>
+                 <textarea class="main reportparam" placeholder="rparam" name="rparam">{rparam}</textarea>
+               </div>
+               <textarea class="main autolabel" placeholder="use the variable RESULT to compile the expression" name="script">{script}</textarea>
+             </div>
+             <div id="schedule">
+                <div class="schedulebox" data-relclass = 'budgetrules' >
+                  <textarea class="main" placeholder="schedule" name="schedule">{schedule}</textarea>
+                  <ul>
+
+                     <li><a href="#generator"> generator </a></li>
+                     <li><a href="#events"> events </a></li>
+                  </ul>
+                  <div id = "generator"></div>
+                  <div id="events" >
+                    <div class='row' name = 'row'>
+                        <div name="eid">{eid}</div>
+                        <div name="edate">{edate}</div>
+                        <div name="priority">{priority}</div>
+                     </div>
+                  </div>
+                </div>
+            </div>
+          </div>
+
+       </div>
+     </div>
+   </body>
+
+</html>

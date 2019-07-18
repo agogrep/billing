@@ -1,0 +1,81 @@
+.trf .sc .selectionbox-label,
+.trf .dc .selectionbox-label{
+  width: 70px;
+}
+
+#btScassaNull,#btDcassaNull{
+  background: var(--a4_col);
+  height: 20px;
+  width: 23px;
+  border: 1px solid var(--a4_col);
+  margin: 2px;
+  text-align: center;
+  padding: 4px 0 0 0;
+  position: relative;
+  right: 0;
+  float: right;
+  cursor: pointer;
+
+}
+
+
+#btScassaNull:hover,
+#btDcassaNull:hover{
+  color: white;
+}
+
+.trf .selectionbox .row div[data-asname="login"]{
+  max-width: 60px;
+  text-overflow: ellipsis;
+}
+
+
+.sc,.dc{
+  width: 192px;
+  float: left;
+}
+.sc .row,.dc .row{
+  border: 1px solid white;
+}
+.trf div[name="oid"]{
+  display: none;
+}
+
+.trf #accept-box,
+.trf #user-box{
+  float: left;
+  /* min-height: 30px; */
+  margin: 2px;
+
+}
+.trf #accept-box{
+  width: 157px;
+}
+.trf #accept-box label
+{
+  padding-top: 6px;
+  width: 80px;
+}
+.trf #accept-box .checkbox{
+  margin-top: 8px;
+}
+.trf #user-box .selectionbox-label{
+  width: 50px;
+  overflow: hidden;
+}
+.trf #user-box {
+  width: 228px;
+}
+#form.trf{
+  /* min-height: 350px; */
+  display: table-cell;
+}
+
+
+#lb_amount{
+  white-space: nowrap;
+  overflow: hidden;
+  width: 150px;
+  text-align: left;
+  text-overflow: ellipsis;
+}

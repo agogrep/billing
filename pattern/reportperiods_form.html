@@ -1,0 +1,47 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <div class="form" id ='main'>
+      <div class="main formsection" id='form' >
+         <div id='sysmessage'></div>
+           <div class="formtabs">
+             <ul>
+                <li><a class = "lang" href="#basic">basic_fields</a></li>
+                <li><a class = "lang" href="#other">others</a></li>
+             </ul>
+             <div id="basic">
+               <input class="main autolabel" type="text"  name="name" value="">
+               <div class="schedulebox"  data-relclass = 'reportperiods'>
+                 <textarea class="main" name="schedule">{schedule}</textarea>
+                 <ul>
+                    <li><a class = "lang" href="#generator">schedule</a></li>
+                    <li><a class = "lang" href="#events">events</a></li>
+                 </ul>
+                 <div id = "generator"></div>
+                 <div id="events" >
+                   <div class='row' name = 'row'>
+                       <div name="eid">{eid}</div>
+                       <div name="edate">{edate}</div>
+                       <div name="priority">{priority}</div>
+                    </div>
+                 </div>
+               </div>
+             </div>
+             <div id="other">
+               <!-- <input placeholder= 'rpid' class="main master autolabel"  type="text"  name="rpid" value=""> -->
+              <div class="main master autolabel infofield"  name="rpid">{rpid}</div>
+               <div name="rpdate" class = 'main hidfeild'  value=""></div>
+               <!-- <div name="enddate" class = 'main hidfeild'  value=""></div> -->
+
+
+             </div>
+
+          </div>
+
+       </div>
+     </div>
+   </body>
+
+</html>

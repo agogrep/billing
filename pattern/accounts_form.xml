@@ -1,0 +1,291 @@
+<?xml version="1.0"?>
+<script>
+
+    <masterfield>aid</masterfield>
+
+    <part>
+      <name>main</name>
+      <section>
+        <parentselector>.//*[@id="main"]</parentselector>
+        <selector>.//*[@id="form"]</selector>
+        <repeat>0</repeat>
+      </section>
+      <sql>
+        <readquery>
+          SELECT a.aid, a.aname, a.curr, a.side, a.usebal, a.descr,
+                  a.apbal, tc.cred, td.debt, (a.apbal+td.debt-tc.cred) balance, a.is_deleted
+          FROM (SELECT aid, apbal, aname,curr,side,usebal,descr, is_deleted
+                      FROM accounts WHERE aid = {aid}) a,
+                    (SELECT if (Sum(minus) &gt; 0,Sum(minus),0) as cred
+                          FROM transactions WHERE source = {aid} AND
+                          IFNULL((SELECT apdate FROM actpoints order by apdate desc LIMIT 1),0) &lt; tdate AND accept = 1) tc,
+                    (SELECT if (Sum(plus) &gt; 0,Sum(plus),0) as debt
+                          FROM transactions WHERE dest = {aid} AND
+                          IFNULL((SELECT apdate FROM actpoints order by apdate desc LIMIT 1),0) &lt; tdate AND accept = 1)  td
+
+        </readquery>
+        <writequery>
+        </writequery>
+        <writegenerator>
+          <scriptname>write</scriptname>
+          <param>
+            <table>accounts</table>
+            <id_name>aid</id_name>
+          </param>
+        </writegenerator>
+        <argument>
+          <aid>
+            <type>int</type>
+            <long></long>
+            <default></default>
+          </aid>
+          <aname>
+            <type>str</type>
+            <long></long>
+            <default></default>
+          </aname>
+          <curr>
+            <type>str</type>
+            <long></long>
+            <default></default>
+          </curr>
+          <side>
+            <type>int</type>
+            <long></long>
+            <default></default>
+<!--баг !!!!!!!!!!!!! -->
+<!-- не правильно работает default при сохранении -->
+
+          </side>
+          <usebal>
+            <type>int</type>
+            <long></long>
+            <default>1</default>
+          </usebal>
+          <apdate>
+            <type>datetime</type>
+            <long></long>
+            <default></default>
+          </apdate>
+          <apbal>
+            <type>int</type>
+            <long></long>
+            <default></default>
+          </apbal>
+          <descr>
+            <type>str</type>
+            <long></long>
+            <default></default>
+          </descr>
+          <balance>
+            <type>int</type>
+            <long></long>
+            <default></default>
+          </balance>
+        </argument>
+      </sql>
+
+      <layout>
+          <element>
+            <selector>.//*[@name="aid"]</selector>
+            <attribute></attribute>
+            <fild></fild>
+          </element>
+          <element>
+            <selector>.//*[@name="aname"]</selector>
+            <attribute>value</attribute>
+            <fild>aname</fild>
+          </element>
+          <element>
+            <selector>.//*[@name="curr"]</selector>
+            <attribute>value</attribute>
+            <fild>curr</fild>
+          </element>
+          <element>
+            <selector>.//*[@name="side"]</selector>
+            <attribute>value</attribute>
+            <fild>side</fild>
+          </element>
+          <element>
+            <selector>.//*[@name="usebal"]</selector>
+            <attribute>value</attribute>
+            <fild>usebal</fild>
+          </element>
+          <!-- <element>
+            <selector>.//*[@name="apdate"]</selector>
+            <attribute>value</attribute>
+            <fild>apdate</fild>
+          </element> -->
+          <element>
+            <selector>.//*[@name="apbal"]</selector>
+            <attribute>value</attribute>
+            <fild>apbal</fild>
+          </element>
+          <element>
+            <selector>.//*[@name="descr"]</selector>
+            <attribute>value</attribute>
+            <fild>descr</fild>
+          </element>
+          <element>
+            <selector>.//*[@name="balance"]</selector>
+            <attribute></attribute>
+            <fild></fild>
+          </element>
+      </layout>
+    </part>
+    <part>
+      <name>users</name>
+      <section>
+        <parentselector>.//*[@id="users"]</parentselector>
+        <selector>.//*[@name="row"]</selector>
+        <repeat>0</repeat>
+      </section>
+      <sql>
+        <readquery>
+          SELECT ua.uaid uaid, u.uid uid, u.login login, ua.def def
+                FROM users u, uid_aid ua
+                WHERE ua.aid = {aid} AND ua.uid = u.uid
+        </readquery>
+        <writequery></writequery>
+        <writegenerator>
+          <scriptname>write</scriptname>
+          <param>
+            <table>uid_aid</table>
+            <id_name>uaid</id_name>
+          </param>
+        </writegenerator>
+
+        <argument>
+          <aid>
+            <type>int</type>
+            <long></long>
+            <default></default>
+          </aid>
+          <uaid>
+            <type>int</type>
+            <long></long>
+            <default></default>
+          </uaid>
+          <uid>
+            <type>int</type>
+            <long></long>
+            <default></default>
+          </uid>
+          <login>
+            <type>str</type>
+            <long></long>
+            <default></default>
+          </login>
+          <def>
+            <type>str</type>
+            <long></long>
+            <default></default>
+          </def>
+        </argument>
+      </sql>
+
+      <layout>
+        <element>
+          <selector>.//*[@name="uaid"]</selector>
+          <attribute></attribute>
+          <fild>uaid</fild>
+        </element>
+          <element>
+            <selector>.//*[@name="uid"]</selector>
+            <attribute></attribute>
+            <fild>uid</fild>
+          </element>
+          <element>
+            <selector>.//*[@name="uid"]</selector>
+            <attribute>data-href</attribute>
+            <fild>uid</fild>
+          </element>
+          <element>
+            <selector>.//*[@name="login"]</selector>
+            <attribute></attribute>
+            <fild>login</fild>
+          </element>
+          <!-- <element>
+            <selector>.//*[@name="def"]</selector>
+            <attribute>value</attribute>
+            <fild>def</fild>
+          </element> -->
+      </layout>
+    </part>
+    <part>
+      <name>labels</name>
+      <section>
+        <parentselector>.//*[@id="labels"]</parentselector>
+        <selector>.//*[@name="row"]</selector>
+        <repeat>0</repeat>
+      </section>
+      <sql>
+        <readquery>
+          SELECT la.laid, l.lid, l.lname, la.def
+                FROM labels l, lid_aid la
+                WHERE la.aid = {aid} AND la.lid = l.lid
+        </readquery>
+        <writequery></writequery>
+        <writegenerator>
+          <scriptname>write</scriptname>
+          <param>
+            <table>lid_aid</table>
+            <id_name>laid</id_name>
+          </param>
+        </writegenerator>
+
+        <argument>
+          <aid>
+            <type>int</type>
+            <long></long>
+            <default></default>
+          </aid>
+          <laid>
+            <type>int</type>
+            <long></long>
+            <default></default>
+          </laid>
+          <lid>
+            <type>int</type>
+            <long></long>
+            <default></default>
+          </lid>
+          <lname>
+            <type>str</type>
+            <long></long>
+            <default></default>
+          </lname>
+          <def>
+            <type>str</type>
+            <long></long>
+            <default></default>
+          </def>
+        </argument>
+      </sql>
+
+      <layout>
+        <element>
+          <selector>.//*[@name="laid"]</selector>
+          <attribute></attribute>
+          <fild>laid</fild>
+        </element>
+          <element>
+            <selector>.//*[@name="lid"]</selector>
+            <attribute></attribute>
+            <fild>lid</fild>
+          </element>
+          <element>
+            <selector>.//*[@name="lid"]</selector>
+            <attribute>data-href</attribute>
+            <fild>lid</fild>
+          </element>
+          <element>
+            <selector>.//*[@name="lname"]</selector>
+            <attribute></attribute>
+            <fild>lname</fild>
+          </element>
+      </layout>
+    </part>
+
+
+  </script>

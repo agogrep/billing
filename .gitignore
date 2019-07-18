@@ -1,0 +1,13 @@
+logs/*
+!logs/.gitkeep
+
+config.hjson
+
+backup/data/*
+!backup/data/.gitkeep
+
+backup/temp/*
+!backup/temp/.gitkeep
+
+profiles/*
+!profiles/default/

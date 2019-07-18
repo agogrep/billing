@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+<script>
+    <masterfield>rpid</masterfield>
+    <part>
+      <name>main</name>
+      <section>
+        <parentselector>.//*[@id="main"]</parentselector>
+        <selector>.//*[@id="form"]</selector>
+        <repeat>0</repeat>
+      </section>
+      <sql>
+        <readquery>SELECT * FROM reportperiods WHERE rpid LIKE {rpid}</readquery>
+        <writequery></writequery>
+        <writegenerator>
+          <scriptname>write</scriptname>
+          <param>
+            <table>reportperiods</table>
+            <id_name>rpid</id_name>
+          </param>
+        </writegenerator>
+        <argument>
+          <rpid>
+            <type>int</type>
+            <long></long>
+            <default></default>
+          </rpid>
+          <rpdate>
+            <type>str</type>
+            <long></long>
+            <default></default>
+          </rpdate>
+          <rpdate>
+            <type>str</type>
+            <long></long>
+            <default></default>
+          </rpdate>
+          <enddate>
+            <type>str</type>
+            <long></long>
+            <default></default>
+          </enddate>
+          <name>
+            <type>str</type>
+            <long></long>
+            <default></default>
+          </name>
+          <schedule>
+            <type>str</type>
+            <long></long>
+            <default></default>
+          </schedule>
+        </argument>
+      </sql>
+
+      <layout>
+          <element>
+            <selector>.//*[@name="rpid"]</selector>
+            <attribute></attribute>
+            <fild></fild>
+          </element>
+          <element>
+            <selector>.//*[@name="rpdate"]</selector>
+            <attribute>value</attribute>
+            <fild>rpdate</fild>
+          </element>
+          <!-- <element>
+            <selector>.//*[@name="enddate"]</selector>
+            <attribute>value</attribute>
+            <fild>enddate</fild>
+          </element> -->
+          <element>
+            <selector>.//*[@name="schedule"]</selector>
+            <attribute></attribute>
+            <fild></fild>
+          </element>
+          <element>
+            <selector>.//*[@name="name"]</selector>
+            <attribute>value</attribute>
+            <fild>name</fild>
+          </element>
+      </layout>
+    </part>
+    <part>
+      <name>events</name>
+      <section>
+        <parentselector>.//*[@id="events"]</parentselector>
+        <selector>.//*[@name="row"]</selector>
+        <repeat>0</repeat>
+      </section>
+      <sql>
+        <readquery>SELECT eid,edate,priority FROM events
+        WHERE relclass = 'reportperiods' AND relid = {rpid} AND edate > CURDATE()
+        ORDER BY edate Limit 8</readquery>
+        <writequery></writequery>
+        <argument>
+          <eid>
+            <type>int</type>
+            <long></long>
+            <default></default>
+          </eid>
+          <edate>
+            <type>str</type>
+            <long></long>
+            <default></default>
+          </edate>
+          <priority>
+            <type>int</type>
+            <long></long>
+            <default></default>
+          </priority>
+
+
+        </argument>
+      </sql>
+      <layout>
+          <element>
+            <selector>.//*[@name="eid"]</selector>
+            <attribute></attribute>
+            <fild>eid</fild>
+          </element>
+          <element>
+            <selector>.//*[@name="edate"]</selector>
+            <attribute></attribute>
+            <fild>edate</fild>
+          </element>
+          <element>
+            <selector>.//*[@name="priority"]</selector>
+            <attribute></attribute>
+            <fild>priority</fild>
+          </element>
+
+      </layout>
+    </part>
+
+
+
+  </script>

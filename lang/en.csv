@@ -1,0 +1,190 @@
+uid;id;user id
+accept;accept;
+aid;id;account id
+all;all;
+aname;name;
+apbal;balance AP;balance actual point
+apdate;date AP;date actual point
+apid;id;actual point id
+apply;apply;
+brdate;date;
+brid;id;budget rule id
+cancel;cansel;
+change;change;
+curr;currency;
+def;default;
+delete;delete;
+descr;desc.;description
+dest;dest.;destination
+done;done;
+DONE;DONE;
+edate;date;
+eid;id;event id
+email;email;
+enddate;end. Period;end of period
+ERROR;ERROR;
+fullname;fullname;
+gname;name;
+lid;id;label id
+lname;name;
+login;login;
+minus;minus;
+name;name;
+oid;id;order id
+password;password;
+plus;plus;
+priority;priority;
+RECORDLOCK;RECORD LOCK;
+relclass;class;
+relid;relation;
+rparam;parameters;
+rpdate;beg. period;beginning of period
+rpid;id;period id
+rsid;id;report id
+schedule;schedule;
+script;script;
+selected;selected;
+side;side;
+source;source;
+sum;sum;
+sysname;sys name;system name
+tcurr;currency;
+tdate;date;
+tid;id;transaction id
+to;to;
+type;type;
+usebal;use bal.;use balance
+journals;journals;
+accounts;accounts;
+users;users;
+transactions;transactions;
+labels;tags;
+reportperiods;periods;
+budgetrules;rules of the budget;
+instruments;instruments;
+setbudget;budget;
+window_manager;window manager;
+history;history;
+whole_journal;whole journal;
+exit;output;
+settings;settings;
+widget_editor;widget editor;
+admin_panel;admin panel;
+reboot_web_server;reboot web server;
+system_reboot;system reboot;
+user_monitor;user monitor;
+recovery;recovery;
+events;events;
+to_end;to end;
+countrows;number of lines;
+new_element;new element;
+option;options;
+search;search;
+fast_searsh;search fast;
+currency_exchange;currency exchange;
+transfer;transfer;
+amount_debited;amount written off;
+replenishment_amount;refill amount;
+ru;russian;
+en;english;
+es;spanish;
+additionally;additionally;
+more_;more .....;
+basic_fields;the main;
+others;other;
+schedule;schedule;
+not_available;no access;
+report;report;
+report_set;report Setup;
+range;range;
+links;filter;
+route;direction;
+balance;balance;
+income;receipts;
+outgo;consumption;
+message;message;
+send;to send;
+add_rule;add rule;
+add_order;add sorting;
+constructor;constructor;
+scripts;scripts;
+accounts_list;journal of accounts;
+accounts_form;score;
+budgetrules_form;budget rule;
+budgetrules_list;budget rulebook;
+events_list;developments;
+labels_form;label;
+labels_list;list of tags;
+reportperiods_form;period;
+reportperiods_list;period list;
+reportscripts_list;list of reports;
+setbudget;budget;
+transactions_form;transaction;
+transactions_list;transaction log;
+users_form;user;
+users_list;a list of users;
+selectItems;value selection;
+handling;treatment;
+selected_el;selected;
+all_el;everything;
+DESC;descending;
+ASC;ascending;
+from_account;from the account;
+on_account;into the account;
+amount;amount;
+user;user;
+years;years;
+months;months;
+week;a week;
+month;month;
+from;with;
+to;by;
+monday ;monday;
+tuesday ;tuesday;
+wednesday ;wednesday;
+thursday ;thursday;
+friday ;friday;
+saturday;saturday;
+sunday ;sunday;
+basic;single;
+based_on_the_report;based on the report;
+schedule;schedule;
+period;period;
+rules;regulations;
+report;report;
+generate_transactions;generate transactions;
+about_system;about system;
+period_from;period from;
+on_report;on report;
+tables;tables;
+forms;forms;
+reports;reports;
+save;save;
+add_panel;add panel;
+list_days_of_week;Sun, Mon, Tues, Wed, Thu, Fri, Sat;
+list_names_of_months;Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec;
+change_language;change language;
+setting_panel;setting panel;
+coming;coming;
+day_week;d.of week;day of the week
+day_month;d.of month;day of the month
+form_will_be_deleted;After confirmation, the form will be deleted.;
+INNER;interior;
+OUTER;external;
+USE;use;
+NOT;not use;
+new;new;
+preset_read_only;This preset is read only;
+already_exists;already exists;
+delete_current_preset;Delete this preset?;
+custom;special;
+purse;purse;
+salary;salary;
+products;products;
+passage;passage;
+rent;rent;
+foundation_at_sea;foundation at sea;
+consumption;consumption;
+arrival_in_a_month;arrival in a month;
+monthly_consumption;monthly consumption;
+earnings;earnings;

@@ -1,0 +1,147 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/file/css/jquery-ui.structure.css">
+    <link rel="stylesheet" href="/file/css/main.css">
+  </head>
+  <body>
+    <div class="target form" id ='main'>
+      <div class="main formsection trf" id='form' >
+        <!-- <style> @import url("/file/css/transactions_form.css");</style> -->
+         <div id='sysmessage'></div>
+          <div name="tid" class="main master autolabel infofield">{tid}</div>
+         <input name="tdate" class = 'main datetimebox  autolabel' type="text" data-mode= "dateTime" value="">
+         <select name="tcurr" data-enumerations = "currency" class = 'main combobox  autolabel' value="">
+          <!-- <option value="UAN">UAN</option>
+          <option value="USD">USD</option> -->
+         </select>
+
+         <div  class = 'selectionbox'>
+           <div id = 'btn-source' type="button"
+                     class = 'dialog button-select ripple'
+                      data-typedialog = 'selectItems'
+                      data-choicemode = 'one'
+                      data-masterfield = 'aid'
+                      data-path = '/accounts_list/'
+                      data-countrows =  8
+                      data-links = ''
+                      data-relationship = '#source'>
+                      <svg><use xlink:href="/file/ico/sprite.svg#three-point"></use></svg>
+          </div>
+          <div class = 'selectionbox-label lang flup'>from_account</div>
+           <div id = 'source' class = 'selectionvalue' >
+            <div class = 'row'>
+              <div name="source" data-asname = 'aid' class="main">{source}</div>
+              <div name = "sourcename" data-asname = 'aname'>{sourcename}</div>
+              <div name="sourcecurr" data-asname = 'curr'>{sourcecurr}</div>
+              <div name = "sourceside" class = 'icon' data-side = "" data-asname = 'side'>{sourceside}</div>
+              <div name = "sourceusebal" class = 'hidfeild' data-asname = 'usebal'>{sourceusebal}</div>
+            </div>
+          </div>
+         </div>
+         <div  class = 'selectionbox'>
+           <div id = 'btn-dest' type="button"
+                   class = 'dialog button-select ripple'
+                    data-typedialog = 'selectItems'
+                  data-choicemode = 'one'
+                    data-masterfield = 'aid'
+                    data-path = '/accounts_list/'
+                    data-countrows =  8
+                    data-links = ''
+                    data-relationship = '#dest'>
+                    <svg><use xlink:href="/file/ico/sprite.svg#three-point"></use></svg>
+          </div>
+          <div class = 'selectionbox-label lang flup'>on_account</div>
+           <div id = 'dest' class = 'selectionvalue' >
+            <div class = 'row'>
+              <div name="dest" data-asname = 'aid' class="main">{dest}</div>
+              <div name = "destname"  data-asname = 'aname'>{destname}</div>
+              <div name="destcurr" data-asname = 'curr'>{destcurr}</div>
+              <div name = "destside" class = 'icon' data-side = "" data-asname = 'side'>{destside}</div>
+              <div name = "destusebal" class = 'hidfeild' data-asname = 'usebal'>{destusebal}</div>
+            </div>
+          </div>
+         </div>
+
+
+
+
+
+         <div class="delimiter"></div>
+         <div class="field-box">
+           <label id = "lb_amount" class = "lang">amount</label>
+           <input  name="minus" class="main" hidden = "hidden" type="number" step=".01" min="0" pattern="([^0].?|0[^0])"  value="">
+           <input name="plus" class="main" hidden = "hidden" type="number" step=".01" min="0"  pattern="([^0].?|0[^0])" value="">
+         </div>
+         <input name="descr" class="main  autolabel" value="">
+
+
+         <p class = "spoiler-switch lang" onclick="spoilerSwitch(this)">additionally</p>
+         <div class = "spoiler" >
+           <div class = 'selectionbox disabled sc'>
+             <div type="button"
+                      class = 'dialog button-select ripple'
+                      data-typedialog = 'selectItems'
+                      data-choicemode = 'one'
+                      data-masterfield = 'uid'
+                      data-path = '/users_list/'
+                      data-countrows =  5
+                      data-relationship = '#scassa'>
+                      <svg><use xlink:href="/file/ico/sprite.svg#three-point"></use></svg>
+              </div>
+              <div class = 'selectionbox-label'>S.cassa:</div>
+              <!-- <div  id = 'btScassaNull'>0</div> -->
+              <div  id = "scassa">
+                <div class = 'row'>
+                  <div name="scassa" class = 'main link ripple dialog' data-typedialog = 'form' data-href='/users_form/?uid={scassa}' data-asname = 'uid' >{scassa}</div>
+                  <div name="slogin" data-asname = 'login' >{slogin}</div>
+                </div>
+              </div>
+           </div>
+           <div class = 'selectionbox disabled dc'>
+             <div type="button" class = 'dialog button-select ripple' data-typedialog = 'selectItems'
+                      data-choicemode = 'one' data-masterfield = 'uid' data-path = '/users_list/'
+                      data-countrows =  5 data-relationship = '#dcassa'>
+                    <svg><use xlink:href="/file/ico/sprite.svg#three-point"></use></svg>
+              </div>
+              <div class = 'selectionbox-label'>D.cassa:</div>
+              <!-- <div id = 'btDcassaNull'>0</div> -->
+              <div  id = "dcassa">
+                <div class = 'row'>
+                  <div name="dcassa" class = 'main link ripple dialog' data-typedialog = 'form' data-href='/users_form/?uid={dcassa}' data-asname = 'uid' >{dcassa}</div>
+                  <div name="dlogin" data-asname = 'login' >{dlogin}</div>
+                </div>
+              </div>
+           </div>
+           <div class="delimiter"></div>
+           <div id = 'accept-box'>
+             <label class = "lang">accept</label>
+             <div name="accept" class = 'main checkbox' value=""></div>
+           </div>
+           <div id = 'user-box'class = 'selectionbox'>
+             <div type="button"
+                      class = 'dialog button-select ripple'
+                      data-typedialog = 'selectItems'
+                      data-choicemode = 'one'
+                      data-masterfield = 'uid'
+                      data-path = '/users_list/'
+                      data-countrows =  5
+                      data-relationship = '#user'>
+                <svg><use xlink:href="/file/ico/sprite.svg#three-point"></use></svg>
+                </div>
+            <div class = 'selectionbox-label lang flup'>user</div>
+             <div id = 'user' class = 'selectionvalue' >
+              <div class = 'row'>
+                <div name="uid"  class="main">{uid}</div>
+                <div name = "login">{login}</div>
+              </div>
+            </div>
+           </div>
+           <div class="delimiter"></div>
+           <div  name="oid"  class="main hidfeild">{oid}</div>
+        </div>
+       </div>
+     </div>
+   </body>
+
+</html>

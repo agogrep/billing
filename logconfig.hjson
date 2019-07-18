@@ -1,0 +1,23 @@
+{
+        handlers: {
+            requests: {
+
+                class: "logging.handlers.RotatingFileHandler",
+                filename: "<[CURRENTBASE]>/logs/requests.log",
+                formatter: "detailed",
+                mode: "a",
+                maxBytes: <[5*1024*1024]>,
+                backupCount: 2,
+            },
+            register: {
+
+                class: "logging.handlers.RotatingFileHandler",
+                filename:"<[CURRENTBASE]>/logs/register.log",
+                mode: "a",
+                formatter: "message",
+                maxBytes: <[5*1024*1024]>,
+                backupCount: 5,
+            },
+        },
+      
+    }

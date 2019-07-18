@@ -1,0 +1,151 @@
+<html>
+<head>
+<meta charset="utf-8">
+</head>
+<body>
+  <div id = "mainmenu">
+
+
+  <ul class="dropdown">
+        <li><p class="lang">journals</p>
+          <ul class="sub_menu">
+             <li>
+                <div    id = 'accounts'
+                     class = 'link dialog lang'
+                     data-typedialog = 'formJournal'
+                     data-href='/accounts_list/?id=0'
+                     data-filters = 'allFields,'
+                     data-masterfield = 'aid'
+                     data-path = "/accounts_list/"
+                     data-countrows = 20
+                     >accounts
+                  </div>
+            </li>
+             <li><div    id = 'users'
+                     class = 'link dialog lang'
+                     data-typedialog = 'formJournal'
+                     data-href='/users_list/?id=0'
+                     data-filters = 'allFields,'
+                     data-preset = 0
+                     data-masterfield = 'uid'
+                     data-path = "/users_list/"
+                     data-countrows = 20
+                     >users
+             </div>
+           </li>
+             <li><div    id = 'transactions'
+                     class = 'link dialog lang'
+                     data-typedialog = 'formJournal'
+                     data-href='/transactions_list/?id=0'
+                     data-filters = 'allFields,'
+                     data-preset = 0
+                     data-masterfield = 'tid'
+                     data-path = "/transactions_list/"
+                     data-countrows = 20
+                     >transactions
+             </div>
+           </li>
+             <li><div    id = 'labels'
+                     class = 'link dialog lang'
+                     data-typedialog = 'formJournal'
+                     data-href='/labels_list/?id=0'
+                     data-filters = 'allFields,'
+                     data-masterfield = 'lid'
+                     data-path = "/labels_list/"
+                     data-countrows = 20
+                     >labels
+             </div>
+           </li>
+             <li>
+               <div    id = 'reportperiods'
+                       class = 'link dialog lang'
+                       data-typedialog = 'formJournal'
+                       data-href='/reportperiods_list/?id=0'
+                       data-filters = 'allFields,'
+                       data-masterfield = 'rpid'
+                       data-path = "/reportperiods_list/"
+                       data-countrows = 20
+                       >reportperiods
+               </div>
+           </li>
+             <li>
+               <div    id = 'budgetrules'
+                     class = 'link dialog lang'
+                     data-typedialog = 'formJournal'
+                     data-href='/budgetrules_list/?id=0'
+                     data-filters = 'allFields,'
+                     data-masterfield = 'brid'
+                     data-path = "/budgetrules_list/"
+                     data-countrows = 20
+                     >budgetrules
+             </div>
+           </li>
+             <li>
+               <div    id = 'events'
+                     class = 'link dialog lang'
+                     data-typedialog = 'formJournal'
+                     data-href='/events_list/?id=0'
+                     data-filters = 'allFields,'
+                     data-masterfield = 'eid'
+                     data-path = "/events_list/"
+                     data-countrows = 20
+                     >events
+             </div>
+           </li>
+          </ul>
+        </li>
+        <li><p class = 'lang'>instruments</p>
+          <ul class="sub_menu">
+             <li>
+               <div
+                       class = 'link dialog  lang'
+                       data-typedialog = 'handling'
+                       data-href='/setbudget/'
+                       >setbudget
+               </div>
+             </li>
+             <li>
+               <div
+                       class = 'link dialog lang'
+                       data-typedialog = 'handling'
+                       data-namescript = 'fromCsvMyData'
+                       >fromCsvMyData
+               </div>
+             </li>
+          </ul>
+        </li>
+        <li id = 'winmanager'><p class = 'lang'>window_manager</p>
+          <ul class="sub_menu">
+            <!-- <li><div class="dropdelim"></div></li> -->
+          </ul>
+        </li>
+        <li id = 'reqhistory'><p class = 'lang'>history</p>
+          <ul class="sub_menu">
+            <li><div class="dropdelim"></div></li>
+            <!-- <li><div class = 'link lang'>whole_journal</div></li> -->
+          </ul>
+        </li>
+        <li><p id = login_name>login_name</p>
+          <ul class="sub_menu">
+            <li><div class = 'link  lang' onclick = "exit()" >exit</div></li>
+            <li><div class="dropdelim"></div></li>
+            <li><div id = 'lnk_main_set' class = 'link  lang'>settings</div></li>
+            <li><div id = "lnk_decktop_set" class = 'link  lang'>widget_editor</div></li>
+            <li><div class = 'link lang dialog' data-typedialog = 'frame' data-href = "/page/about_system.html">about_system</div></li>
+            <!-- <li>
+             <a href="#" class = 'lang' >Admin_panel</a>
+             <ul>
+               <li><div id = 'webreboot' data-line = 'restart_apache' class = 'link  lang'>reboot_web_server</div></li>
+               <li><div id = 'systemreboot' data-line = 'reboot_server' class = 'link  lang'>system_reboot</div></li>
+               <li><div class = 'link  lang'>user_monitor</div></li>
+               <li><div class = 'link  lang'>recovery</div></li>
+             </ul>
+            </li> -->
+        </ul>
+        </li>
+      </ul>
+  <div class = 'delimiter'></div>
+  </div>
+
+</body>
+</html>

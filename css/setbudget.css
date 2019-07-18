@@ -1,0 +1,17 @@
+.handling #setting .daterange .datetimebox{
+  font-size: 16px;
+  width: 128px;
+}
+.handling #setting .selectionbox{
+  max-width:330px
+}
+.handling #setting .field-box{
+  max-width: 334px;
+}
+
+.handling #setting  .daterange{
+  width: 190px
+}
+.handling #setting label.autonamelab{
+  width: 100px;
+}

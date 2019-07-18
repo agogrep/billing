@@ -1,0 +1,76 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="/file/css/jquery-ui.structure.css">
+    <link rel="stylesheet" href="/file/css/main.css">
+  </head>
+  <body onload='ini()'>
+    <div class="target form" id ='main'>
+      <div class="main formsection" id='form' >
+         <div id='sysmessage'></div>
+         <div class="main master autolabel infofield" name="aid">{aid}</div>
+         <input class="main autolabel" type="text"  name="aname" value="">
+         <select name="curr" data-enumerations = "currency" class = 'main combobox  autolabel' value="">
+            <!-- <option value="UAN">UAN</option>
+            <option value="USD">USD</option> -->
+         </select>
+         <select class = 'main combobox autolabel' data-enumerations = 'side' name="side" value=""></select>
+         <select class = 'main combobox autolabel' data-enumerations = 'use_balance' name="usebal" value=""></select>
+         <!-- <div class = 'main datetimebox autolabel' name="apdate" value=""></div> -->
+         <input class="main autolabel"  type="number"  name="apbal" value="">
+         <div class = 'autolabel infofield' name="balance" value="">{balance}</div>
+         <input class = 'main autolabel' name="descr" value="">
+
+         <div class = 'selectionbox' style="max-width: 394px;">
+           <div class = 'dialog button-select'
+                   data-typedialog = 'selectItems'
+                   data-choicemode = 'multi'
+                   data-masterfield = 'uid'
+                   data-path = '/users_list/'
+                   data-countrows =  8
+                   data-relationship = '#users'>
+            <svg><use xlink:href="/file/ico/sprite.svg#three-point"></use></svg>
+            </div>
+          <div class = 'selectionbox-label flup'>users</div>
+          <div id = 'users' class='form'>
+             <div class='users row formsection' name = 'row'>
+                <div class = 'users hidfeild' name="uaid">{uaid}</div>
+                <div class = 'users dialog ' data-typedialog = 'form' data-href='/users_form/?uid={uid}' name="uid">{uid}</div>
+                <div class = 'users' name="login">{login}</div>
+                <!-- <div class = 'users switchbox ' name="def" value =""></div> -->
+             </div>
+         </div>
+
+        </div>
+
+        <div class = 'selectionbox' style="max-width: 394px;">
+          <div class = 'dialog button-select'
+                  data-typedialog = 'selectItems'
+                  data-choicemode = 'multi'
+                  data-masterfield = 'lid'
+                  data-path = '/labels_list/'
+                  data-countrows =  8
+                  data-relationship = '#labels'>
+          <svg><use xlink:href="/file/ico/sprite.svg#three-point"></use></svg>
+          </div>
+          <div class = 'selectionbox-label flup'>labels</div>
+          <div id = 'labels' class='form'>
+             <div class='labels row formsection' name = 'row'>
+                <div class = 'labels hidfeild' name="laid">{laid}</div>
+                <div class = 'labels dialog ' data-typedialog = 'form' data-href='/labels_form/?lid={lid}' name="lid">{lid}</div>
+                <div class = 'labels lang' name="lname">{lname}</div>
+             </div>
+         </div>
+        </div>
+
+       </div>
+     </div>
+
+
+
+   </body>
+
+</html>

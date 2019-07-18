@@ -1,0 +1,97 @@
+/*--------------------- data-content -------------------------------*/
+
+
+.row .icon{
+    font-size: 0;
+}
+
+.row .icon::before{
+  font-size: 16px;
+  font-family: 'main-ico' !important;
+  color: var(--e1_col);
+}
+
+
+.row div[data-side="1"]::before{
+  content: "\e904";
+}
+.row div[data-side="0"]::before{
+  content: "\e902";
+}
+.row div[data-usebal="1"]::before{
+  content: "\e903";
+}
+.row div[data-usebal="0"]::before{
+  content: "\e901";
+}
+.row div[data-accept="1"]::before{
+  content: "\e903";
+}
+.row div[data-accept="0"]::before{
+  content: "\e901";
+}
+
+/* from budgetrules */
+.row div[data-type="0"]::before{ /* ANALYTIC */
+  content: "\e99b";
+}
+.row div[data-type="1"]::before{ /* DEFER */
+  content: "\e953";
+}
+.row div[data-type="2"]::before{ /* AUTODEFER */
+  content: "\e997";
+}
+
+
+
+
+
+/* ====================== loadSvc ====================== */
+#translist .saved {
+  background: #F4FFBF;
+}
+
+#btn_load_svc{
+  height: 27px;
+  margin-top: 1px;
+  float: inline-start;
+}
+
+
+input[type="file"] {
+    display: none;
+}
+
+
+.file_load_box i{
+  display: block;
+margin-top: 3px;
+margin-left: 6px;
+}
+
+.file_load_box {
+    display: block;
+    cursor: pointer;
+    background: var(--a4_col);
+    border: 1px solid var(--a4_col);
+    height: 28px;
+    margin: 1px;
+    /* padding-left: 6px;
+    padding-top: 4px; */
+
+}
+.file_load_box svg{
+  margin-bottom: -1px;
+}
+
+.file_load_box p{
+  float: right;
+  padding: 2px;
+}
+
+
+
+.file_load_box:hover{
+  color: white;
+  fill: white;
+}

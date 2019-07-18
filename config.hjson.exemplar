@@ -1,0 +1,53 @@
+{
+  main:{
+    name: "billing",
+    version: 0.01,
+    compatibility: 0.01,
+    protection: "none", # tsl ssh
+    demo: true
+  },
+  root: {
+    login: "agogos",
+    password: "agogos"
+  },
+  passport_db:{
+    svcode: 'bill_001',
+    version: '001'
+  },
+  mysql:{
+    host: "localhost",
+    database: "",
+    user: "",
+    password: "",
+    connection_timeout: 5
+  },
+  backup:{
+    default: "local",
+    ftp:{
+        host: "",
+        path:"",
+        port: 21,
+        user: "",
+        password: "",
+        mincopies: 3,
+        minday: 5,
+        quota: 10000
+    },
+    local:{
+        path:'',
+        mincopies: 3,
+        minday: 5,
+        quota: 10000
+    }
+  },
+  mail: {
+    login:  "",
+    password: "",
+    sendto: "",
+    smtp:  ""
+  },
+  'tasks': [
+    ['backup','0 0 * * *'],
+  ]
+
+}

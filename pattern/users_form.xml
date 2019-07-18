@@ -1,0 +1,142 @@
+<?xml version="1.0"?>
+<script>
+    <masterfield>uid</masterfield>
+    <part>
+      <name>main</name>
+      <section>
+        <parentselector>.//*[@id="main"]</parentselector>
+        <selector>.//*[@id="form"]</selector>
+        <repeat>0</repeat>
+      </section>
+      <sql>
+        <readquery>SELECT * FROM users WHERE uid LIKE {uid}</readquery>
+        <writequery></writequery>
+        <writegenerator>
+          <scriptname>write</scriptname>
+          <param>
+            <table>users</table>
+            <id_name>uid</id_name>
+          </param>
+        </writegenerator>
+        <argument>
+          <uid>
+            <type>int</type>
+            <long></long>
+            <default></default>
+          </uid>
+          <login>
+            <type>str</type>
+            <long></long>
+            <default></default>
+          </login>
+          <password>
+            <type>str</type>
+            <long></long>
+            <default></default>
+          </password>
+          <fullname>
+            <type>str</type>
+            <long></long>
+            <default></default>
+          </fullname>
+          <email>
+            <type>str</type>
+            <long></long>
+            <default></default>
+          </email>
+          <descr>
+            <type>str</type>
+            <long></long>
+            <default></default>
+          </descr>
+        </argument>
+      </sql>
+
+      <layout>
+          <element>
+            <selector>.//*[@name="uid"]</selector>
+            <attribute></attribute>
+            <fild></fild>
+          </element>
+          <element>
+            <selector>.//*[@name="login"]</selector>
+            <attribute>value</attribute>
+            <fild>login</fild>
+          </element>
+          <element>
+            <selector>.//*[@name="password"]</selector>
+            <attribute>value</attribute>
+            <fild>password</fild>
+          </element>
+          <element>
+            <selector>.//*[@name="fullname"]</selector>
+            <attribute>value</attribute>
+            <fild>fullname</fild>
+          </element>
+          <element>
+            <selector>.//*[@name="email"]</selector>
+            <attribute>value</attribute>
+            <fild>email</fild>
+          </element>
+          <element>
+            <selector>.//*[@name="descr"]</selector>
+            <attribute>value</attribute>
+            <fild>descr</fild>
+          </element>
+      </layout>
+    </part>
+    <part>
+      <name>cassa</name>
+      <section>
+        <parentselector>.//*[@id="info"]</parentselector>
+        <selector>.//*[@name="cassa"]</selector>
+        <repeat>0</repeat>
+      </section>
+      <sql>
+        <readquery>
+          SELECT main.curr, SUM(main.balance) balance FROM (
+              SELECT  pre.curr, SUM(pre.balance) balance FROM (
+                  SELECT tr.tid, tr.source, ac.curr, (-1*tr.minus) balance FROM transactions tr
+                      INNER JOIN accounts ac ON ac.aid = tr.source
+                            WHERE IFNULL((SELECT apdate FROM actpoints order by apdate desc LIMIT 1),0) &lt; tdate
+                                        AND scassa = {uid} AND accept = 1 ORDER BY ac.curr) pre GROUP BY pre.curr
+              UNION
+              SELECT  pre.curr, SUM(pre.balance) balance FROM (
+                  SELECT tr.tid, tr.dest, ac.curr, tr.plus balance FROM transactions tr
+                      INNER JOIN accounts ac ON ac.aid = tr.dest
+                            WHERE IFNULL((SELECT apdate FROM actpoints order by apdate desc LIMIT 1),0) &lt; tdate
+                                        AND dcassa = {uid} AND accept = 1 ORDER BY ac.curr) pre GROUP BY pre.curr
+              UNION
+              SELECT curr, apbal balance FROM cassapoints WHERE uid = {uid}) main
+          GROUP BY main.curr;
+        </readquery>
+        <argument>
+          <uid>
+            <type>int</type>
+            <long></long>
+            <default></default>
+          </uid>
+          <balance>
+            <type>int</type>
+            <long></long>
+            <default></default>
+          </balance>
+        </argument>
+      </sql>
+      <layout>
+          <element>
+            <selector>.//*[@name="curr"]</selector>
+            <attribute></attribute>
+            <fild></fild>
+          </element>
+          <element>
+            <selector>.//*[@name="balance"]</selector>
+            <attribute></attribute>
+            <fild></fild>
+          </element>
+      </layout>
+    </part>
+
+
+
+  </script>

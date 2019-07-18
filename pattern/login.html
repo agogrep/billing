@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+    <meta charset="utf-8">
+    <style>
+      :root{
+        --int-el: #B5B5FF;
+        --main-line: #9C9C9C;
+      }
+      input{
+        border: 1px solid var(--main-line);
+        height: 25px;
+        width: 250px;
+        margin: 2px;
+        text-align: center;
+        padding: 0;
+      }
+      button{
+        background: var(--int-el);
+        border: 1px solid var(--int-el);
+        height: 30px;
+        width: 252px;
+        margin: 2px;
+        cursor: pointer;
+        --ripple-duration: 1200ms;
+        padding: 0;
+      }
+      button:hover,button:focus{
+        color: white;
+      }
+      button:active{
+        outline: none;
+      }
+      button::-moz-focus-inner
+      {
+        border: 0;
+      }
+
+      #formbox{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin: -125px 0 0 -125px;
+      }
+      body{
+        width: 100%;
+        height: 100%;
+      }
+      .ripple {
+        position: relative;
+        overflow: hidden;
+      }
+      .ripple:before {
+        content: '';
+        position: absolute;
+        display: block;
+        background: var(--ripple-background, white);
+        border-radius: 50%;
+        pointer-events: none;
+        top: calc(var(--y) * 1px);
+        left: calc(var(--x) * 1px);
+        width: calc(var(--d) * 1px);
+        height: calc(var(--d) * 1px);
+        opacity: calc(var(--o, 1) * var(--ripple-opacity, 0.3));
+        transition: calc(var(--t, 0) * var(--ripple-duration, 600ms)) var(--ripple-easing, linear);
+        -webkit-transform: translate(-50%, -50%) scale(var(--s, 1));
+                transform: translate(-50%, -50%) scale(var(--s, 1));
+        -webkit-transform-origin: center;
+                transform-origin: center;
+      }
+    .hidden{
+      display: none;
+    }
+    </style>
+
+  </head>
+  <body>
+    <div id ='formbox'>
+      <div id = "message"></div>
+      <form id = 'form'  method='POST' >
+            <input  type="text" placeholder="login" name="login"><br/>
+            <input  type="password"  placeholder="password" name="password"><br/>
+            <input class = 'hidden' type="submit" >
+            <button  class = "ripple">sign in</button>
+      </form>
+    </div>
+    <script>
+    [].map.call(document.querySelectorAll('.ripple'), function (el) {
+        el.addEventListener('click', function (e) {
+            e = e.touches ? e.touches[0] : e;
+            var r = el.getBoundingClientRect(), d = Math.sqrt(Math.pow(r.width, 2) + Math.pow(r.height, 2)) * 2;
+            el.style.cssText = "--s: 0; --o: 1;";
+            el.offsetTop;
+            el.style.cssText = "--t: 1; --o: 0; --d: " + d + "; --x:" + (e.clientX - r.left) + "; --y:" + (e.clientY - r.top) + ";";
+        });
+    });
+    </script>
+  </body>
+
+</html>

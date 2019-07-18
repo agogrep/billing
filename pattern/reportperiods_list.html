@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+</head>
+<body id ='root'>
+  <div id = 'reportperiods'
+        class = 'journal'
+        data-filters = 'allFields,'
+        data-masterfield = 'rpid'
+        data-path = "/reportperiods_list/">
+    <div class='row' name = 'row'>
+       <div class = 'dialog link ripple'
+            data-typedialog = 'form'
+            data-href='/reportperiods_form/?rpid={rpid}'
+            name="rpid">{rpid}</div>
+        <div name="name">{name}</div>
+        <div name="enddate">{enddate}</div>
+     </div>
+  </div>
+</body>
+</html>

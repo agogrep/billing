@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+</head>
+<body id ='root'>
+  <div id = 'budgetrules'
+        class = 'journal'
+        data-filters = 'allFields,'
+        data-masterfield = 'brid'
+        data-path = "/budgetrules_list/">
+    <div class='row' name = 'row'>
+       <div class = 'dialog link ripple'
+            data-typedialog = 'form'
+            data-href='/budgetrules_form/?brid={brid}'
+            name="brid">{brid}</div>
+        <div name="brdate">{brdate}</div>
+        <div name="enddate">{enddate}</div>
+        <div class = 'icon' data-type = "" name="type" >{type}</div>
+        <div name="priority">{priority}</div>
+        <div name="source">{source}</div>
+        <div name="dest">{dest}</div>
+        <div name="sum">{sum}</div>
+        <div name="script">{script}</div>
+    </div>
+  </div>
+</body>
+</html>

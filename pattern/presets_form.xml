@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<script>
+    <masterfield>prid</masterfield>
+    <part>
+      <name>main</name>
+      <section>
+        <parentselector>.//*[@id="main"]</parentselector>
+        <selector>.//*[@id="form"]</selector>
+        <repeat>0</repeat>
+      </section>
+      <sql>
+        <readquery></readquery>
+        <writequery></writequery>
+        <writegenerator>
+          <scriptname>write</scriptname>
+          <param>
+            <table>presets</table>
+            <id_name>prid</id_name>
+          </param>
+        </writegenerator>
+        <argument>
+        </argument>
+      </sql>
+
+      <layout>
+      </layout>
+    </part>
+    <part>
+    </part>
+
+
+
+  </script>

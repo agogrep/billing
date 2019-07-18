@@ -1,0 +1,190 @@
+uid;id;id пользователя
+accept;проведен;
+aid;id;id счета
+all;все;
+aname;название;
+apbal;баланс ТА;баланс точки актуализации
+apdate;дата ТА;дата точки актуализации
+apid;id;id точки актуализации
+apply;применить;
+brdate;дата;
+brid;id;id правила бюджета
+cancel;отмена;
+change;изменить;
+curr;валюта;
+def;по умолчанию;
+delete;удалить;
+descr;описание;
+dest;назначение;
+done;выполнено;
+DONE;ВЫПОЛНЕНО;
+edate;дата;
+eid;id;id события
+email;эл.адрес;
+enddate;кон. периода;конец периода
+ERROR;ОШИБКА;
+fullname;полное имя;
+gname;название;
+lid;id;id метки
+lname;название;
+login;пользователь;имя пользователя
+minus;минус;
+name;название;
+oid;id;id ордера
+password;пароль;паль пользователя
+plus;плюс;
+priority;приоритет;
+RECORDLOCK;ЗАПИСЬ ЗАБЛОКИРОВАНА;
+relclass;класс;
+relid;связь;
+rparam;параметры;
+rpdate;нач. периода;начало периода
+rpid;id;id периода
+rsid;id;id рапорта
+schedule;расписание;
+script;скрипт;
+selected;выбранный;
+side;расположение;
+source;источник;
+sum;сумма;
+sysname;сист. имя;системное имя
+tcurr;валюта;
+tdate;дата;
+tid;id;id транзакции
+to;по;
+type;тип;
+usebal;исп.баланс;использовать баланс
+journals;журналы;
+accounts;cчета;
+users;пользователи;
+transactions;транзакции;
+labels;метки;
+reportperiods;периоды;
+budgetrules;правила бюждета;
+instruments;инструменты;
+setbudget;бюджет;
+window_manager;менеджер окон;
+history;история;
+whole_journal;весь журнал;
+exit;выход;
+settings;настройки;
+widget_editor;редактор виджетов;
+admin_panel;панель администратора;
+reboot_web_server;перезагрузка веб сервера;
+system_reboot;перезагрузка системы;
+user_monitor;монитор пользователя;
+recovery;восстановление;
+events;события;
+to_end;к концу;
+countrows;количество строк;
+new_element;новый элемент;
+option;параметры;
+search;поиск;
+fast_searsh;искать быстро;использовать быстрый поиск
+currency_exchange;обмен валют;
+transfer;перевод;
+amount_debited;сумма списания;
+replenishment_amount;сумма пополнения;
+ru;русский;
+en;английский;
+es;испанский;
+additionally;дополнительно;
+more_;больше.....;
+basic_fields;основные;
+others;другие;
+schedule;расписание;
+not_available;нет доступа;
+report;отчет;
+report_set;настройка отчета;
+range;диапазон;диапазон дат
+links;фильтр;настройка фильтра links
+route;направление;
+balance;баланс;
+income;поступления;
+outgo;расход;
+message;сообщение;
+send;отправить;
+add_rule;добавить правило;
+add_order;добавить сортировку;
+constructor;конструктор;
+scripts;скрипты;
+accounts_list;журнал счетов;
+accounts_form;счет;
+budgetrules_form;правило бюджета;
+budgetrules_list;журнал правил бюджета;
+events_list;события;
+labels_form;метка;
+labels_list;список меток;
+reportperiods_form;период;
+reportperiods_list;список периодов;
+reportscripts_list;список рапортов;
+setbudget;бюджет;
+transactions_form;транзакция;
+transactions_list;журнал транзакций;
+users_form;пользователь;
+users_list;список пользователей;
+selectItems;выбор значения;
+handling;обработка;
+selected_el;выбранные;
+all_el;все;
+DESC;по убыванию;
+ASC;по возрастанию;
+from_account;cо счета;
+on_account;на счет;
+amount;сумма;
+user;пользователь;
+years;годы;
+months;месяцы;
+week;неделя;
+month;месяц;
+from;с;
+to;по;
+monday ;понедельник;
+tuesday ;вторник;
+wednesday ;среда;
+thursday ;четверг;
+friday ;пятница;
+saturday;суббота;
+sunday ;воскресенье;
+basic;одсновные;
+based_on_the_report;на основании отчета;
+schedule;расписание;
+period;период;
+rules;правила;
+report;отчет;
+generate_transactions;генерировать транзакции;
+about_system;о системе;
+period_from;период с:;
+on_report;по отчету;
+tables;таблицы;
+forms;формы;
+reports;отчеты;
+save;сохранить;
+add_panel;добавить панель;
+list_days_of_week;Вс,Пн,Вт,Ср,Чт,Пт,Сб;
+list_names_of_months;Янв,Фев,Мар,Апр,Май,Июн,Июл,Авг,Сен,Окт,Ноя,Дек;
+change_language;изменить язык;
+setting_panel;панель настроек;
+coming;приход;
+day_week;д. недели;день недели
+day_month;д. месяца;день месяца
+form_will_be_deleted;После подтверждения форма будет удалена;
+INNER;внутренний;
+OUTER;внешний;
+USE;использовать;
+NOT;не использовать;
+new;новый;
+preset_read_only;Этот пресет доступен только для чтения;
+already_exists;уже есть;
+delete_current_preset;Удалить этот пресет?;
+custom;специальный;
+purse;кошелек;
+salary;зарплата;
+products;продукты;
+passage;проезд;
+rent;квартплата;
+foundation_at_sea;фонд на море;
+consumption;расход;
+arrival_in_a_month;приход за месяц;
+monthly_consumption;расход за месяц;
+earnings;доход;

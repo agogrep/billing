@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<script>
+    <part>
+      <section>
+        <parentselector>.//*[@id="reportperiods"]</parentselector>
+        <selector>.//*[@name="row"]</selector>
+        <repeat>0</repeat>
+      </section>
+      <sql>
+        <readquery></readquery>
+        <writequery></writequery>
+        <readgenerator>
+          <scriptname>journal</scriptname>
+          <param>
+            <table>reportperiods</table>
+            <id_name>rpid</id_name>
+            <countrows>10</countrows>
+          </param>
+        </readgenerator>
+        <argument>
+          <rpid>
+            <type>int</type>
+            <long></long>
+            <default></default>
+          </rpid>
+          <rpdate>
+            <type>str</type>
+            <long></long>
+            <default></default>
+          </rpdate>
+          <enddate>
+            <type>str</type>
+            <long></long>
+            <default></default>
+          </enddate>
+        </argument>
+      </sql>
+      <layout>
+          <element>
+            <selector>.//*[@name="rpid"]</selector>
+            <attribute></attribute>
+            <fild>rpid</fild>
+          </element>
+          <element>
+            <selector>.//*[@name="rpid"]</selector>
+            <attribute>data-href</attribute>
+            <fild>rpid</fild>
+          </element>
+          <element>
+            <selector>.//*[@name="name"]</selector>
+            <attribute></attribute>
+            <fild>name</fild>
+          </element>
+          <!-- <element>
+            <selector>.//*[@name="rpdate"]</selector>
+            <attribute></attribute>
+            <fild>rpdate</fild>
+          </element> -->
+          <element>
+            <selector>.//*[@name="enddate"]</selector>
+            <attribute></attribute>
+            <fild>enddate</fild>
+          </element>
+
+      </layout>
+    </part>
+    <part></part>
+
+
+
+  </script>

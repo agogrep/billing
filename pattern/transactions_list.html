@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/file/css/jquery-ui.structure.css">
+    <link rel="stylesheet" href="/file/css/main.css">
+</head>
+<body id ='root'>
+  <div id = 'transactions'
+        class = 'journal'
+        data-filters = 'allFields,'
+        data-masterfield = 'tid'
+        data-path = "/transactions_list/">
+    <div class='row' name = 'row'>
+       <div class = 'dialog link ripple'
+            data-typedialog = 'form'
+            data-href='/transactions_form/?tid={tid}'
+            name="tid">{tid}</div>
+       <div name="tdate">{tdate}</div>
+       <div name="tcurr">{tcurr}</div>
+       <div name="accept" class = 'icon' data-accept = "">{accept}</div>
+       <div name="source">{source}</div>
+       <div name="minus">{minus}</div>
+       <div name="dest">{dest}</div>
+       <div name="plus">{plus}</div>
+       <div name="descr">{descr}</div>
+       <div name="oid">{oid}</div>
+       <div name="uid">{uid}</div>
+     </div>
+  </div>
+</body>
+</html>

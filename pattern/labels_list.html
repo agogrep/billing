@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/file/css/jquery-ui.structure.css">
+    <link rel="stylesheet" href="/file/css/main.css">
+</head>
+<body id ='root'>
+  <div id = 'labels'
+        class = 'journal'
+        data-filters = 'allFields,'
+        data-masterfield = 'tid'
+        data-path = "/labels_list/">
+    <div class='row' name = 'row'>
+       <div class = 'dialog link ripple'
+            data-typedialog = 'form'
+            data-href='/labels_form/?lid={lid}'
+            name="lid">{lid}</div>
+       <div name="lname" class = "flup">{lname}</div>
+       <div name="descr">{descr}</div>
+     </div>
+  </div>
+</body>
+</html>

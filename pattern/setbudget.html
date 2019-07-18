@@ -1,0 +1,85 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <div class="handling">
+      <div class="main">
+      <!-- <style> @import url("/file/css/setbudget.css");</style> -->
+        <div class ="formtabs">
+          <ul>
+            <li><a href="#rules" class = "lang">rules</a></li>
+            <li><a href="#report" class = "lang">report</a></li>
+            <li><a href="#setting" class = "lang">settings</a></li>
+          </ul>
+          <div id = 'rules'>
+            <div id = 'budgetrules'
+                  class = 'journal'
+                  data-use-control-panel = 1
+                  data-filters = 'allFields,'
+                  data-links = 'budgetrules.is_deleted = 0'
+                  data-masterfield = 'brid'
+                  data-path = "/budgetrules_list/">
+              <div class='row' name = 'row'>
+                 <div class = 'dialog link ripple'
+                      data-typedialog = 'form'
+                      data-href='/budgetrules_form/?brid={brid}'
+                      name="brid">{brid}</div>
+                  <div name="brdate">{brdate}</div>
+                  <div name="enddate">{enddate}</div>
+                  <div name="type">{type}</div>
+                  <div name="priority">{priority}</div>
+                  <div name="source">{source}</div>
+                  <div name="dest">{dest}</div>
+                  <div name="sum">{sum}</div>
+                  <div name="script">{script}</div>
+              </div>
+            </div>
+
+          </div>
+          <div id="report"></div>
+          <div id="setting">
+            <div class = "period daterange autolabel" name =  "daterange">
+              <div>
+                <label class = "lang" >from</label>
+                <input id = "startdate" class = "datetimebox" type = "text"/>
+              </div>
+              <div>
+                <label class = "lang" >to</label>
+                <input id = "enddate" class = "datetimebox" type = "text"/>
+              </div>
+            </div>
+            <div class="delimiter"></div>
+            <div  class = 'selectionbox'>
+              <div  type="button"
+                        class = 'dialog button-select'
+                         data-typedialog = 'selectItems'
+                         data-choicemode = 'one'
+                         data-masterfield = 'rpid'
+                         data-path = '/reportperiods_list/'
+                         data-countrows =  8
+                         data-links = ''
+                         data-relationship = '#reportperiod'>
+                         <svg><use xlink:href="/file/ico/sprite.svg#three-point"></use>
+                       </div>
+              <div class = 'selectionbox-label lang'>Period</div>
+              <div id = 'reportperiod' class = 'selectionvalue' >
+               <div class = 'row'>
+                 <div name="rpid" class="main">{rpid}</div>
+                 <div name="name" class="main">{name}</div>
+               </div>
+             </div>
+            </div>
+
+
+          </div>
+        </div>
+        <div id = 'progressbox' class = "ripple">
+          <button id = "btn-gentrans"  class = "lang" >generate_transactions</button>
+          <div class = " not-ripple statusbar"></div>
+        </div>
+
+       </div>
+     </div>
+   </body>
+</html>

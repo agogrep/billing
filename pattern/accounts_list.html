@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="/file/css/jquery-ui.structure.css">
+    <link rel="stylesheet" href="/file/css/main.css">
+  </head>
+  <body id ='targetlist' onload='ini()'>
+  <button onclick="openWinMan()">Диспетчер</button>
+  <button onclick="winClosed('WinMan')">закрыть</button>
+  <button class = 'dialog' href='/accounts_form/?new=0'>Новый</button>
+  <input id = 'val' aria-label = 'test_val' />
+  <button onclick="test_remove()">test_remove</button>
+  <button onclick="reload()">reload</button>
+  <button onclick="testHidden()">testHidden</button>
+  <div class = 'journal' id = 'accounts' data-filters = 'allFields,' data-masterfield = 'aid' data-path = "/accounts_list/">
+    <div class='row' name = 'row'>
+       <div class = 'dialog link ripple' data-typedialog = 'form' data-href='/accounts_form/?aid={aid}' name="aid">{aid}</div>
+       <div name="aname" class = "flup" >{aname}</div>
+       <div name="curr">{curr}</div>
+       <div name="apbal">{apbal}</div>
+       <div name="descr">{descr}</div>
+       <div name="balance">{balance}</div>
+       <div name="side" class = 'icon' data-side = "">{side}</div>
+       <div name="usebal" class = 'icon' data-usebal = "">{usebal}</div>
+     </div>
+  </div>
+<!-- <div class='form journal' id = 'users'>
+      <div class='users row' name = 'row'>
+        <div class = 'users dialog ' href='/users_form/?uid={uid}' name="uid">{uid}</div>
+        <div class = 'users' name="login">dfgh</div>
+      </div>
+ </div> -->
+  <script src="/js/dialog.js"></script>
+  <script src="/js/journal.js"></script>
+  <script>iniJournal('#accounts.journal')</script>
+   </body>
+
+</html>
