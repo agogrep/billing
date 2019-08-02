@@ -7,9 +7,11 @@
         relationshipElement: $(''),
         saveBoxEL: null,
         messageElement: null,
-        _stampupdate:0
+        _stampupdate:0,
+        whenReceived:function() {}
       },
       _create: function() {
+        // console.log('allCounts _create',this.element);
         this.options.relationshipElement = this.element.siblings('.reportparam');
         var reportName = this.element.find('.reportname').text();
         var controlEl = $('<div id = "reportcontrol">'+
@@ -82,7 +84,7 @@
       },
 
       send:function(event) {
-        // console.log('event',event);
+        // console.log('send event',event);
         if (event=='whenSend') {
           this.options._stampupdate = 0;
         }
@@ -147,7 +149,7 @@
               root.find('div[name="table"]').journal({
                 useCorrectColumns:true,
               });
-	      
+
             }
 
           },
@@ -162,6 +164,18 @@
             'param':out.reports
           }
         ];
+
+        call.push((input)=>{
+          // console.log('call.push((input)=>{',input);
+          if (input.length>0) {
+            if ('content' in input[0]) {
+              // console.log('if (content in input[0]) {');
+              this.options.whenReceived(input[0].content);
+            }
+          }
+        });
+
+
         mxhRequest(newOut,call);
       },
 

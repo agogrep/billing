@@ -16,7 +16,7 @@
   },
   mysql:{
     host: "localhost",
-    database: "",
+    database: "billing",
     user: "",
     password: "",
     connection_timeout: 5

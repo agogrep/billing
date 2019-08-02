@@ -11,11 +11,12 @@
                 <li><a class = "lang" href="#basic">basic</a></li>
                 <li><a class = "lang" href="#on_report">on_report</a></li>
                 <li><a class = "lang" href="#schedule">schedule</a></li>
+                <li><a class = "lang" href="#performance">performance</a></li>
 
              </ul>
              <div id="basic">
                 <div name="brid" class="main master  autolabel infofield">{brid}</div>
-                <input class="main autolabel" type="text"  name="name" value="">
+                <input class ="main autolabel" type="text"  name="name" value="">
                 <input name="brdate" class = 'main datetimebox  autolabel' type="text"  value="">
                 <div  class = 'selectionbox'>
                   <div id = 'btn-source' type="button"
@@ -34,6 +35,9 @@
                    <div class = 'row'>
                      <div name="source" data-asname = 'aid' class="main">{source}</div>
                      <div name = "sourcename" data-asname = 'aname'>{sourcename}</div>
+                     <div name="sourcecurr" data-asname = 'curr'>{sourcecurr}</div>
+                     <div name = "sourceside" class = 'icon' data-side = "" data-asname = 'side'>{sourceside}</div>
+                     <div name = "sourceusebal" class = 'hidfeild' data-asname = 'usebal'>{sourceusebal}</div>
                    </div>
                  </div>
                 </div>
@@ -54,7 +58,10 @@
                   <div id = 'dest' class = 'selectionvalue' >
                    <div class = 'row'>
                      <div name="dest" data-asname = 'aid' class="main">{dest}</div>
-                     <div name = "destname" data-asname = 'aname'>{destname}</div>
+                     <div name = "destname"  data-asname = 'aname'>{destname}</div>
+                     <div name="destcurr" data-asname = 'curr'>{destcurr}</div>
+                     <div name = "destside" class = 'icon' data-side = "" data-asname = 'side'>{destside}</div>
+                     <div name = "destusebal" class = 'hidfeild' data-asname = 'usebal'>{destusebal}</div>
                    </div>
                  </div>
                 </div>
@@ -64,10 +71,12 @@
                         pattern="([^0].?|0[^0])"  value="">
                 <select name="type" class = 'main combobox  autolabel' data-enumerations = 'mode_budgetrule' value=""></select>
                 <input  name="priority" class="main  autolabel" type="number"  value="">
-              <div class="field-box" title="">
-                <label class="lang autonamelab flup">period</label>
-                <select class="main periods combobox" name="rpid" value=""></select>
-              </div>
+                <div name="track" class = 'main checkbox autolabel' value=""></div>
+                <div class="field-box" title="">
+                  <label class="lang autonamelab flup">period</label>
+                  <select class="main periods combobox" name="rpid" value=""></select>
+                </div>
+
              </div>
              <div id = "on_report">
                <div class = 'reportbox'>
@@ -98,6 +107,31 @@
                      </div>
                   </div>
                 </div>
+            </div>
+            <div id="performance">
+
+              <div id = 'transactions'
+                    data-use-control-panel = 1
+                    data-links = 'transactions.is_deleted = 0'
+                    data-masterfield = 'tid'
+                    data-path = "/transactions_list/"
+                    data-countrows = 12>
+
+                <div class='row' name = 'row'>
+                   <!-- <div class = 'dialog link ripple'
+                        data-typedialog = 'form'
+                        data-href='/budgetrules_form/?brid={brid}'
+                        name="brid">{brid}</div>
+                    <div name="brdate">{brdate}</div>
+                    <div name="enddate">{enddate}</div>
+                    <div name="type">{type}</div>
+                    <div name="priority">{priority}</div>
+                    <div name="source">{source}</div>
+                    <div name="dest">{dest}</div>
+                    <div name="sum">{sum}</div>
+                    <div name="script">{script}</div> -->
+                </div>
+              </div>
             </div>
           </div>
 

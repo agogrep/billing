@@ -45,6 +45,18 @@ class Budget:
         elif budgetrule['rparam'].strip():
             reportParam = json.loads(budgetrule['rparam'])
             dateRange = reportParam.get('dateRange')
+
+
+            '''
+            Задачи по модулю
+            текущий период получать из системы
+            отслеживать выполнение по прошедшим транзакциям используя отчет
+            определять курс операции tcurr автоматически (сейчас стоит UAN)
+            uid = 0 !
+            в протокол поддержка списка правил. для возможности использования из ВЕБки + измененные суммы
+            '''
+
+
             if dateRange is None:
                 deltaDate = '''
                 (SELECT * FROM events WHERE relclass = 'reportperiods' AND relid = {1}
@@ -141,7 +153,7 @@ class Budget:
 
     def scheduledExecution(self):
         # prefix = ''
-        print('scheduledExecution =======================')
+        # print('scheduledExecution =======================')
         '''by default, transactions are created only
         for rules that have the type autodefer'''
         levelType = 2 # is "autodefer". else 0 - for all types

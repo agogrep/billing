@@ -9,8 +9,10 @@
         <repeat>0</repeat>
       </section>
       <sql>
-        <readquery>SELECT b.brid,b.brdate,b.script,b.rsid,b.rparam,
-        b.source,s.aname sourcename,b.dest,d.aname destname,r.sysname,
+        <readquery>SELECT b.brid,b.name, b.track, b.brdate,b.script,b.rsid,b.rparam,
+        b.source, s.aname sourcename, s.curr sourcecurr, s.side sourceside, s.usebal sourceusebal,
+        b.dest, d.aname destname, d.curr destcurr, d.side destside, d.usebal destusebal,
+        r.sysname,
         b.sum,b.type,b.priority,b.rpid,b.schedule FROM budgetrules b
         LEFT OUTER JOIN accounts s ON s.aid = b.source
         LEFT OUTER JOIN accounts d ON d.aid = b.dest
@@ -95,6 +97,11 @@
             <long></long>
             <default></default>
           </schedule>
+          <name>
+            <type>str</type>
+            <long></long>
+            <default></default>
+          </name>
         </argument>
       </sql>
       <layout>
@@ -178,6 +185,61 @@
             <attribute></attribute>
             <fild>schedule</fild>
           </element>
+          <element>
+            <selector>.//*[@name="name"]</selector>
+            <attribute>value</attribute>
+            <fild>name</fild>
+          </element>
+          <element>
+            <selector>.//*[@name="track"]</selector>
+            <attribute>value</attribute>
+            <fild>track</fild>
+          </element>
+
+
+
+
+          <element>
+            <selector>.//*[@name="sourceside"]</selector>
+            <attribute></attribute>
+            <fild></fild>
+          </element>
+          <element>
+            <selector>.//*[@name="sourceside"]</selector>
+            <attribute>data-side</attribute>
+            <fild>sourceside</fild>
+          </element>
+          <element>
+            <selector>.//*[@name="sourceusebal"]</selector>
+            <attribute></attribute>
+            <fild></fild>
+          </element>
+          <element>
+            <selector>.//*[@name="destside"]</selector>
+            <attribute></attribute>
+            <fild></fild>
+          </element>
+          <element>
+            <selector>.//*[@name="destside"]</selector>
+            <attribute>data-side</attribute>
+            <fild>destside</fild>
+          </element>
+          <element>
+            <selector>.//*[@name="destusebal"]</selector>
+            <attribute></attribute>
+            <fild></fild>
+          </element>
+          <element>
+            <selector>.//*[@name="sourcecurr"]</selector>
+            <attribute></attribute>
+            <fild></fild>
+          </element>
+          <element>
+            <selector>.//*[@name="destcurr"]</selector>
+            <attribute></attribute>
+            <fild></fild>
+          </element>
+
       </layout>
     </part>
     <part>

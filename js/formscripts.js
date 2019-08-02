@@ -12,6 +12,55 @@ var budgetrules_form =  {
       });
 
     this.element.find('.reportbox').report('openSet');
+
+    var source = this.element.find('[name=source]').text();
+    var dest = this.element.find('[name=dest]').text();;
+
+    if ((source)&&(dest)) {
+      this.element.find('#transactions').journal({
+        links:'transactions.is_deleted = 0 && transactions.source = '+source+' && transactions.dest = '+dest+'',
+        sel_fields:'tid,tdate,source,minus,dest,plus,descr,is_deleted'
+      });
+
+
+      function getData() {
+        var fieldList = ['source','sourcename','sourcecurr','sourceside','sourceusebal','dest','destname','destcurr','destside','destusebal','sum'];
+        var data = {};
+        for (var i = 0; i < fieldList.length; i++) {
+          var val = getValElement( thisEl.find('#basic [name='+fieldList[i]+']') );
+          data[fieldList[i]] = val;
+        }
+        if (! data.sum) {
+          var rsid = getValElement(thisEl.find('#on_report [name=rsid]'));
+          if (rsid) {
+            thisEl.find('.reportbox').report('option','whenReceived',(inp)=>{
+              var script =  getValElement(thisEl.find('#on_report [name=script]'));
+              try {
+                var amount = inp.amount[0].amount;
+                script = script.replace('RESULT',String(amount));
+                data.sum = eval(script);
+              } catch (e) {
+                alert('Attention! Failed to execute script to calculate the amount based on the report.\n'+e);
+              }
+            });
+            Request.wait();
+            thisEl.find('.reportbox').report('send');
+          }
+        }
+        return data
+      }
+
+      var showTab = (ev,ui)=>{
+        if (ev.currentTarget.hash == "#performance") {
+          thisEl.find('#transactions').journal('applyFilter',0);
+          this.element.find('#performance #new-element').data({ importData: getData() });
+        }
+      }
+      thisEl.find('.formtabs').wintabs( "option","activate", showTab);
+    }
+
+
+
     }
 }
 
@@ -40,7 +89,27 @@ var transactions_form =  {
       //     }
       //   }// закончить установку событий
       // }
+      // var data = $(this.element.form('option','relationshipElement','prevObject')).data()
+      // console.log('data',this.element.form('option','relationshipElement').data());
 
+
+      // load from external source
+      var data = this.element.form('option','relationshipElement').data();
+      if ('importData' in data) {
+
+        for (var el in data.importData) {
+          if (el == 'sum') {
+            this.element.find('[name=plus],[name=minus]').val(Number(data.importData.sum));
+          }else{
+            this.element.find('[name='+el+']').text(data.importData[el]);
+          }
+        }
+        this.element.find('[name=sourceside]').attr('data-side',data.importData.sourceside);
+        this.element.find('[name=destside]').attr('data-side',data.importData.destside);
+        // console.log('data-hash',this.element.attr('data-hash'));
+      }
+
+      // console.log('next ============= ');
       this.settingApp();
       this.element.find('.selectionvalue').changeDiv(target=>{
         this.whenChanges($(target));
