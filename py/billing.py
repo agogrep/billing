@@ -3,7 +3,7 @@ import json
 import logging, traceback
 from datetime import datetime
 
-from agog import serverman, db, content, tools, traceLevel
+from agog import serverman, db, content, tools, traceLevel, reportscripts
 currentBase = db.GlobVar().get('currentBase')
 log = logging.getLogger(currentBase+'.requests')
 
@@ -17,21 +17,28 @@ log = logging.getLogger(currentBase+'.requests')
 class Budget:
     mode = 'planning' # 'realchange'
     base = None
+    uid = 0
     def __init__(self):
         self.base = db.dbSql()
+        self.uid  = db.GlobVar().get('session').get('uid')
 
     def manager(self,param):
         self._line = param.pop('_line')
+
         return [
             { 'target': self._line, 'content': getattr(self, self._line)(**param)}]
 
-    def set(self,mode):
+    def set(self,mode,idList=[]):
         try:
             ev = serverman.Event()
             ev.deleteAllUnrelated()
             self.mode = mode;
-            self.scheduledExecution();
-            return {'status':'DONE'}
+            errorList = self.scheduledExecution(idList);
+            if len(errorList):
+                return {'status':'ERROR',
+                        'log':errorList}
+            else:
+                return {'status':'DONE'}
         except Exception as e:
             reqLog = tools.customLogger('requests')
             reqLog.error( traceback.format_exc( traceLevel ) )
@@ -39,96 +46,94 @@ class Budget:
 
 
     def setTransaction(self,budgetrule):
-        amount = 0
-        if budgetrule['sum']:
-            amount = budgetrule['sum']
-        elif budgetrule['rparam'].strip():
-            reportParam = json.loads(budgetrule['rparam'])
-            dateRange = reportParam.get('dateRange')
 
 
-            '''
-            Задачи по модулю
-            текущий период получать из системы
-            отслеживать выполнение по прошедшим транзакциям используя отчет
-            определять курс операции tcurr автоматически (сейчас стоит UAN)
-            uid = 0 !
-            в протокол поддержка списка правил. для возможности использования из ВЕБки + измененные суммы
-            '''
+        '''
+        Задачи по модулю
+
+        в протокол поддержка списка правил. для возможности использования из ВЕБки + измененные суммы
+        '''
+
+        try:
+            print('budgetrule',budgetrule)
 
 
-            if dateRange is None:
-                deltaDate = '''
-                (SELECT * FROM events WHERE relclass = 'reportperiods' AND relid = {1}
-                              AND edate < "{0}" ORDER BY edate DESC LIMIT 1)
-                UNION
-                (SELECT * FROM events WHERE relclass = 'reportperiods' AND relid = {1}
-                              AND edate >= "{0}"
-                              ORDER BY edate LIMIT 1)'''.format( budgetrule['edate'],budgetrule['rpid'] )
+            amount = float(0)
 
-                self.base.cursor.execute(deltaDate)
-                rows = self.base.cursor.fetchall()
-                dateRange = []
+            if budgetrule['otherAmount']:
+                amount = float(budgetrule['otherAmount'])
 
-                l = len(rows)
+            else:
+                par = {
+                    'date': str(budgetrule['edate']),
+                    'rpid': budgetrule['rpid']
+                }
+                currPer = reportscripts.currentPeriods(**par)[ budgetrule['rpid'] ]
+                dateRange = [ currPer['startdate'],  currPer['enddate']  ]
 
-                if l == 2:
-                    # print('>>>>>>>>>> ','dateRange', rows)
-                    dateRange = [rows[0]['edate'],rows[1]['edate']]
-                elif l ==1:
-                    if (rows[0]['edate'] < budgetrule['edate']):
-                        dateRange.append(rows[0]['edate'])
-                        dateRange.append(budgetrule['edate'])
-                    else:
-                        dateRange.append(rows[0]['edate'])
-                else:
-                    dateRange.append(budgetrule['edate'])
+                # получение суммы по уже проведенным транзакциям
+                reportParam = {
+                    'dateRange':dateRange,
+                    'links': "aid = "+str(budgetrule['dest']),
+                    'period': "custom",
+                    'route': "output",
+                    'scriptName': "allCounts"
+                }
+                report = content.ReportGen()
+                res = report.getReport(reportParam)
+                amountForPeriod =  float(res['amount'][0]['amount'])
 
-            # print('budgetrule',budgetrule['brid'])
+                # получение суммы по бюджету
+                if budgetrule['sum']:
+                    amount = float(budgetrule['sum'])
+                elif budgetrule['rparam'].strip():
+                    reportParam = json.loads(budgetrule['rparam'])
+                    reportParam['dateRange']= dateRange
+                    reportParam['scriptName'] = budgetrule['sysname']
+                    # print('reportParam',reportParam)
+                    if self.mode =='planning':
+                        reportParam['mode'] = self.mode
+                    report = content.ReportGen()
+                    res = report.getReport(reportParam)
+                    RESULT = float(res['amount'][0]['amount'])
+                    amount = eval(budgetrule['script'])
 
-
-            reportParam['dateRange']= dateRange
-
-            if self.mode =='planning':
-                reportParam['mode'] = self.mode
-
-            report = content.ReportGen()
-            res = report.getReport(reportParam)
-
-
-
-            try:
-                RESULT = float(res['amount'][0]['amount'])
-                amount = eval(budgetrule['script'])
-
-            except Exception as e:
-                print(e)
-                return
+                if (amountForPeriod < amount) or (budgetrule['track']==0):
+                    amount = amount - amountForPeriod
 
 
-        values = {
-            'table' :  'temp_transactions' if self.mode == 'planning' else 'transactions',
-            'tdate':    budgetrule['edate'],
-            'tcurr': 'UAN',
-            'accept':   1,
-            'minus':    amount if budgetrule['sourceusebal']==1 else 0,
-            'plus':     amount if budgetrule['destusebal']==1 else 0,
-            'source':   budgetrule['source'],
-            'dest':     budgetrule['dest'],
-            'scassa':   0,
-            'dcassa':   0,
-            'descr':    'brid {0}'.format(budgetrule['brid']),
-            'uid':      1
 
-        }
+            # print('amountForPeriod',amountForPeriod,'amount',amount)
 
+            if amount:
+                values = {
+                    'table' :  'temp_transactions' if self.mode == 'planning' else 'transactions',
+                    'tdate':    str(budgetrule['edate']),
+                    'tcurr':    budgetrule['sourcecurr'],
+                    'accept':   1,
+                    'minus':    amount if budgetrule['sourceusebal']==1 else 0,
+                    'plus':     amount if budgetrule['destusebal']==1 else 0,
+                    'source':   budgetrule['source'],
+                    'dest':     budgetrule['dest'],
+                    'scassa':   self.uid if budgetrule['sourceside']==0 else 0,
+                    'dcassa':   self.uid if budgetrule['destside']==0 else 0,
+                    'descr':    'brid {0}. created according to budget rules'.format(budgetrule['brid']),
+                    'uid':     self.uid
 
-        sql = '''
-            INSERT INTO {table} (tdate,tcurr,accept,minus,plus,source,dest,scassa,dcassa,descr,uid)
-            VALUES ("{tdate}","{tcurr}",{accept},{minus},{plus},
-                      {source},{dest},{scassa},{dcassa},"{descr}",{uid})
-        '''.format(**values)
-        self.base.cursor.execute(sql)
+                }
+
+                sql = '''
+                    INSERT INTO {table} (tdate,tcurr,accept,minus,plus,source,dest,scassa,dcassa,descr,uid)
+                    VALUES ("{tdate}","{tcurr}",{accept},{minus},{plus},
+                              {source},{dest},{scassa},{dcassa},"{descr}",{uid})
+                '''.format(**values)
+                self.base.cursor.execute(sql)
+        except Exception as e:
+
+            print(traceback.format_exc( 10 ) )
+
+            raise
+
 
 
 
@@ -151,7 +156,7 @@ class Budget:
         ap.setAP(datetime.now(),'preparation')
 
 
-    def scheduledExecution(self):
+    def scheduledExecution(self,idList):
         # prefix = ''
         # print('scheduledExecution =======================')
         '''by default, transactions are created only
@@ -166,38 +171,73 @@ class Budget:
         else:
             forToday = 'AND edate <= "{0}"'.format(str(datetime.now().date()))
 
+        # bridList = ''
+        # if len(idList) >0 :
+        #     levelType = 1
+        #     bridList = "{AND brid in ({0})}".format( ','.join( [str(i) for i in idList] ) )
+        evList = ''
+        evList_ = []
+        evDict = {}
+        if len(idList) >0 :
+            levelType = 1
+            for ev in idList:
+                evList_.append(str(ev[0]))
+                evDict[ev[0]] = ev[1]
+
+            evList = "WHERE ev.eid in ({0})".format( ','.join( evList_) )
+
+
+
+
+
+            # evList = "{AND ev.eid in ({0})}".format( ','.join( [str(i) for i in idList] ) )
+
+
         # select events for the reporting period
         sql  = '''
-            SELECT ev.eid, ev.edate, b.brid,b.script,b.rparam,b.source,b.dest,b.sum,b.type,
-                b.rpid,b.sourceusebal,b.destusebal
+            SELECT ev.eid, ev.edate, b.track, b.brid, b.script,b.rparam,b.sum,b.type, b.rpid, b.sysname,
+                b.source, b.sourceusebal, b.sourcecurr, b.sourceside,
+                b.dest, b.destusebal, b.destcurr, b.destside
             FROM (SELECT * FROM events
                         WHERE relclass = 'budgetrules' AND done = 0 {forToday}
                         ORDER BY  edate, priority) ev
-                 INNER JOIN ( SELECT brid, script,rparam,source,
-                                    dest,sum,type,rpid,
-                                    s.usebal sourceusebal, d.usebal destusebal
-                                    FROM budgetrules
-                              INNER JOIN accounts s ON s.aid = source
-                              INNER JOIN accounts d ON d.aid = dest
+                 INNER JOIN ( SELECT bg.brid, bg.track, bg.script, bg.rparam, bg.source,
+                                    bg.dest, bg.sum, bg.type, bg.rpid, r.sysname, bg.rsid,
+                                    s.usebal sourceusebal, s.curr sourcecurr, s.side sourceside,
+                                    d.usebal destusebal, d.curr destcurr, d.side destside
+                                    FROM budgetrules bg
+                              INNER JOIN accounts s ON s.aid = bg.source
+                              INNER JOIN accounts d ON d.aid = bg.dest
+                              LEFT OUTER JOIN reportscripts r ON r.rsid = bg.rsid
                               WHERE type >= {type}
-                             ) b ON ev.relid = b.brid
-        '''.format(forToday = forToday,type = levelType)
+                             ) b ON ev.relid = b.brid {evList}
+        '''.format(forToday = forToday,type = levelType, evList=evList)
 
         self.base.cursor.execute(sql)
         rows = self.base.cursor.fetchall()
 
 
         eventsList = []
+        errorList = []
         for row in rows:
-            self.setTransaction(row)
+            try:
+                row['otherAmount'] = evDict.get( row['eid'] )
+                self.setTransaction(row)
+            except Exception as e:
+                errorList.append('event {0} for budget {1} failed. {2}'.format( str(row['eid']),str(row['brid']),e))
+
             eventsList.append(str(row['eid']))
+
 
         self.base.conn.commit()
 
 
         if self.mode !='planning':
             if len(eventsList):
-                self.setDone(eventsList)
+                pass
+                # self.setDone(eventsList)
+
+        return errorList
 
     def setDone(self,eventsList):
         '''set the mark about the done event'''
