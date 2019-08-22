@@ -2,6 +2,33 @@
 from agog import sqlgen
 
 
+def journal_events_budget(**arg):
+    # print('arg = ==== ',arg)
+
+
+
+    if 'filter' in arg:
+        if 'links' in arg['filter']:
+            arg['filter']['links'] = 'relclass = budgetrules && ({0})'.format(arg['filter']['links'])
+        else:
+            arg['filter']['links'] = 'relclass = budgetrules'
+    else:
+        arg['filter'] = {
+            'links' : 'relclass = budgetrules'
+        }
+
+
+
+    pattern = '''
+    SELECT * FROM ({0}) main
+    INNER JOIN (SELECT DISTINCT b.brid, b.source, s.aname sourcename, b.dest, d.aname destname, b.sum FROM budgetrules b
+    LEFT OUTER JOIN accounts s ON s.aid = b.source
+    LEFT OUTER JOIN accounts d ON d.aid = b.dest
+    ) budgetrules ON budgetrules.brid = main.relid
+    '''
+
+    return pattern.format( sqlgen.journal(**arg) )
+
 
 
 

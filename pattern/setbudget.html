@@ -8,9 +8,10 @@
       <!-- <style> @import url("/file/css/setbudget.css");</style> -->
         <div class ="formtabs">
           <ul>
+            <li><a href="#task" class = "lang">task</a></li>
             <li><a href="#rules" class = "lang">rules</a></li>
-            <li><a href="#report" class = "lang">report</a></li>
             <li><a href="#setting" class = "lang">settings</a></li>
+            <li><a href="#report" class = "lang">report</a></li>
           </ul>
           <div id = 'rules'>
             <div id = 'budgetrules'
@@ -70,14 +71,32 @@
                </div>
              </div>
             </div>
-
-
+            <div id = 'progressbox' class = "ripple">
+              <button id = "btn-gentrans"  class = "lang" >generate_transactions</button>
+              <div class = " not-ripple statusbar"></div>
+            </div>
+          </div>
+          <div id="task">
+            <div id = 'taskbox'></div>
+            <div id = 'org' >
+             <div class = 'row'>
+               <div name="eid"></div>
+               <div name="edate"></div>
+               <div name="priority"></div>
+               <div name="done"></div>
+               <div name="brid"></div>
+               <div name="source"></div>
+               <div name="sourcename"></div>
+               <div name="dest"></div>
+               <div name="destname"></div>
+               <div name="sum"></div>
+               <div name="cal_amount"></div>
+               <div name="fixed_amount" ></div>
+             </div>
+           </div>
           </div>
         </div>
-        <div id = 'progressbox' class = "ripple">
-          <button id = "btn-gentrans"  class = "lang" >generate_transactions</button>
-          <div class = " not-ripple statusbar"></div>
-        </div>
+
 
        </div>
      </div>

@@ -8,6 +8,8 @@
       },
 
     _create: function() {
+
+        var thisEl =   this.element;
         this.options.statusbar = this.element.find('.statusbar')
         this.options.statusbar.textOutput({showWaiting: true});
         this.element.find('#btn-gentrans').click(()=>{
@@ -22,12 +24,158 @@
           }
         });
         this.setDate();
-        var formtabs = this.element.find('.formtabs');
-        // this.element.find('.daterange').daterange({
-        //       usePeriods:true,
-        //       dictPeriods: serviceData.reports.currentPeriods
-        // });
+        // var formtabs = this.element.find('.formtabs');
+
+
+        // управление задачами
+        var taskbox = this.element.find('#taskbox');
+        var orgEl = this.element.find('#org');
+
+        var date = new Date();
+        var toDay = 'edate <= '+date.toISOString().substr(0, 10);
+        var param = {
+          useStandardButtons:false,
+          choicemode : 'multi',
+          masterfield : 'eid',
+          path :'/events_budget_list/',
+          countrows :  10,
+          links : 'is_deleted = 0 && done = 0 && events.relid@budgetrules.type > 0 && '+toDay,
+          relationshipElement : orgEl
+        }
+        taskbox.selectItems(param);
+        orgEl.addClass('hidden');
+        var buttonsboxEl = taskbox.find('#buttonsbox');
+        var btn_execute = $('<button id = "btn_execute">execute</button>');
+        var btn_clear = $('<button id = "btn_clear">clear</button>');
+        var btn_recount = $('<button id = "btn_recount">recount</button>');
+        buttonsboxEl.append(btn_recount,btn_execute,btn_clear);
+
+        btn_recount.click(()=>{
+          var rowlist = taskbox.find('#org .row:not(.subrow)');
+          var valList = [];
+          rowlist.each((i,el)=>{
+            var eid = Number($(el).find('[name="eid"]').text());
+            valList.push(eid);
+          });
+          // console.log(valList);
+
+          var out = [
+            {
+              'target':{
+                  'location':'custom',
+                  'module':'billing',
+                  'class': "Budget",
+              },
+              'param':{
+                _line:'ruleReportsList',
+                 idList: valList
+              }
+            }
+          ];
+          var call = [
+            (input)=>{
+              // taskbox.find('#org .row:not(.subrow)')
+              for (var el in input[0].content) {
+                var curEl = taskbox.find('#org .row:not(.subrow) [name=eid]:contains('+String(el)+')');
+
+                var cred = input[0].content[el].credited;
+                var pay = input[0].content[el].payment;
+                var cal = (pay - cred)<0 ? 0 : pay-cred;
+                curEl.siblings('[name=cal_amount]').text( String( cal ));
+                curEl.siblings('[name=sum]').text( String( input[0].content[el].payment ));
+              }
+              // console.log('content',input[0].content);
+              taskbox.find('#tab').wintabs('option','active',0);
+            }
+
+          ];
+          mxhRequest(out,call);
+        });
+
+
+        btn_clear.click(()=>{
+          thisEl.setbudget('clearTasks');
+
+        });
+        btn_execute.click(()=>{
+          var rowlist = taskbox.find('#org .ec-row-selected:not(.subrow)');
+          var valList = [];
+          rowlist.each((i,el)=>{
+            var eid = Number($(el).find('[name="eid"]').text());
+            var fixed_amount = Number($(el).find('[name="fixed_amount"] input').val());
+            valList.push([ eid, fixed_amount? fixed_amount : 0  ]);
+            // console.log(i,el);
+          });
+          console.log(valList);
+
+          var out = [
+            {
+              'target':{
+                  'location':'custom',
+                  'module':'billing',
+                  'class': "Budget",
+              },
+              'param':{
+                _line:'set',
+                 mode:'realchange',
+                 idList: valList
+              }
+            }
+          ];
+          var call = [
+            (input)=>{
+              if (input[0].content.status =="DONE") {
+                thisEl.setbudget('clearTasks');
+                taskbox.selectItems('option','_allJournal').journal('applyFilter',0);
+              }else{
+                var errListEl = $('<ul>');
+                for (var i = 0; i < input[0].content.log.length; i++) {
+                  var li = $('<li>').text(input[0].content.log[i]);
+                  errListEl.append(li);
+                }
+                errListEl.windialog({'typedialog':'error'});
+              }
+            }
+          ];
+          mxhRequest(out,call);
+        });
+
+        this.element.find('#taskbox').click((ev)=>{
+          if ('name' in ev.target.attributes) {
+            var fixAmEl = $(ev.target);
+            console.log('fixAmEl',fixAmEl.parent()[0].id);
+            var isTitles =  (fixAmEl.parent()[0].id == 'titles');
+
+            if ((ev.target.attributes.name.nodeValue == 'fixed_amount') && (!isTitles)) {
+                console.log('target',ev.target.attributes.name.nodeValue);
+                // if (!fixAmEl.hasClass('is-input')) {
+                console.log('============ not is-input');
+                var extInput = fixAmEl.find('input');
+                if (extInput.length==0) {
+                  var innerText = fixAmEl.text();
+                  var inputEl = $('<input>');
+                  // pattern="([^0].?|0[^0])"  pattern="\d+(\.\d{2})?"
+                  inputEl.val(innerText);
+                  fixAmEl.text('').append(inputEl);
+                  inputEl.focus();
+                }else{
+                  extInput.focus();
+                }
+            }
+          }
+        });
+
+
+
+
       },
+      clearTasks:function(){
+        this.element.find('#taskbox #org .row.org').remove();
+        // taskbox.find('#org .row.org').remove();
+        this.element.find('.formtabs #all .inbuilt-journal .ec-row-selected').checkrow('toggle');
+
+      },
+
       transactionPlanning: function () {
         let prom = new Promise((resolve)=>{
           var call = [
@@ -88,7 +236,7 @@
           reportTab.empty();
           reportTab.append(targetEl);
           var chart = new google.charts.Line(targetEl[0]);
-          thisEl.find('.formtabs').wintabs('option','active',1);
+          thisEl.find('.formtabs').wintabs('option','active',3);
           chart.draw(data, google.charts.Line.convertOptions(options));
           statusbar.textOutput('print','готово',"<br>");
           statusbar.textOutput('stop');

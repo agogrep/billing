@@ -15,3 +15,39 @@
 .handling #setting label.autonamelab{
   width: 100px;
 }
+
+
+#btn-gentrans{
+  float: left;
+}
+
+
+#taskbox .row [name="fixed_amount"] input{
+  border: none;
+font-size: inherit;
+font-family: inherit;
+font-style: inherit;
+color: inherit;
+}
+#taskbox .row [name="fixed_amount"]{
+  height: 18px;
+  width:  50px;
+}
+#taskbox .row [name="fixed_amount"]:hover{
+  border-bottom: 1px solid var(--e1_col);
+}
+#taskbox [name="edate"]{
+  max-width: 90px !important;
+}
+#taskbox #btn_clear{
+  position: absolute;
+  right: 0;
+}
+
+
+.handling #setting #progressbox{
+  bottom: 0px;
+  right: 0;
+  left: 0;
+  position: absolute;
+}

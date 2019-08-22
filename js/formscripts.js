@@ -30,23 +30,46 @@ var budgetrules_form =  {
           var val = getValElement( thisEl.find('#basic [name='+fieldList[i]+']') );
           data[fieldList[i]] = val;
         }
-        if (! data.sum) {
-          var rsid = getValElement(thisEl.find('#on_report [name=rsid]'));
-          if (rsid) {
-            thisEl.find('.reportbox').report('option','whenReceived',(inp)=>{
-              var script =  getValElement(thisEl.find('#on_report [name=script]'));
-              try {
-                var amount = inp.amount[0].amount;
-                script = script.replace('RESULT',String(amount));
-                data.sum = eval(script);
-              } catch (e) {
-                alert('Attention! Failed to execute script to calculate the amount based on the report.\n'+e);
-              }
-            });
-            Request.wait();
-            thisEl.find('.reportbox').report('send');
+        var out = [
+          {
+            'target':{
+                'location':'custom',
+                'module':'billing',
+                'class': "Budget",
+            },
+            'param':{
+              _line:'ruleReports',
+               edate: new Date().toISOString().substr(0, 10),
+               brid: getValElement(thisEl.find('[name=brid]')),
+            }
           }
-        }
+        ];
+        var call = [
+          (input)=>{
+            var cred = input[0].content.credited;
+            var pay = input[0].content.payment;
+            data.sum = (pay - cred)<0 ? 0 : pay-cred;
+          }
+        ];
+        Request.wait();
+        mxhRequest(out,call);
+        // if (! data.sum) {
+        //   var rsid = getValElement(thisEl.find('#on_report [name=rsid]'));
+        //   if (rsid) {
+        //     thisEl.find('.reportbox').report('option','whenReceived',(inp)=>{
+        //       var script =  getValElement(thisEl.find('#on_report [name=script]'));
+        //       try {
+        //         var amount = inp.amount[0].amount;
+        //         script = script.replace('RESULT',String(amount));
+        //         data.sum = eval(script);
+        //       } catch (e) {
+        //         alert('Attention! Failed to execute script to calculate the amount based on the report.\n'+e);
+        //       }
+        //     });
+        //     Request.wait();
+        //     thisEl.find('.reportbox').report('send');
+        //   }
+        // }
         return data
       }
 
