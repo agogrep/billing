@@ -23,6 +23,11 @@
             <long></long>
             <default></default>
           </brid>
+          <brid>
+            <type>str</type>
+            <long></long>
+            <default></default>
+          </brid>
           <brdate>
             <type>str</type>
             <long></long>
@@ -75,6 +80,11 @@
             <selector>.//*[@name="brid"]</selector>
             <attribute>data-href</attribute>
             <fild>brid</fild>
+          </element>
+          <element>
+            <selector>.//*[@name="name"]</selector>
+            <attribute></attribute>
+            <fild>name</fild>
           </element>
           <element>
             <selector>.//*[@name="brdate"]</selector>

@@ -1,5 +1,177 @@
 /*jshint esversion: 6 */
 //########### configuration BILLING #########################################
+
+
+
+var contracts_form = {
+  whenEndLoad:function () {
+    var thisEl = this.element;
+    var data = this.element.form('option','relationshipElement').data();
+    var inData = {};
+    if ('importData' in data) {
+      inData = data.importData(this.element);
+    }
+    for (var el in inData) {
+      var currEl = this.element.find('[name='+el+']');
+      currEl.text(inData[el]);
+      currEl.closest('.row').removeClass('subrow');
+      if (currEl.attr('data-href')) {
+        currEl.attr('data-href', currEl.attr('data-href')+inData[el]);
+      }
+    }
+
+    if ('customer' in inData) {
+      // console.log('data-relationship',this.element.find('[data-relationship = "#budget"]'));
+      this.element.find('[data-relationship = "#budget"]').attr('data-links',
+      'is_deleted = 0 && ( budgetrules.source@accounts.sid = '+inData.customer+' || budgetrules.dest@accounts.sid = '+inData.customer+' )')
+    }
+
+    var btnFill = this.element.find('#btn_fill');
+    btnFill.change(()=>{
+      console.log('btnFill.change(()=>{',thisEl.find('[name="cid"]').text());
+      var cid = thisEl.find('[name="cid"]').text();
+      if (cid) {
+        var file = btnFill[0].files[0];
+        autoCompleteDocuments(file,'fillContract',{cid:cid});
+      }
+    });
+
+  }
+}
+
+var accounts_form = {
+  whenEndLoad:function () {
+    var thisEl = this.element;
+    var data = thisEl.form('option','relationshipElement').data();
+    if ('importData' in data) {
+      data.importData(this.element);
+    }
+  }
+}
+
+
+
+
+
+var subjects_form = {
+    whenEndLoad:function () {
+      var thisEl = this.element;
+
+      //.addClass('.disabled');
+      thisEl.form('option','whenSevedForm',tabsLock);
+      function tabsLock() {
+        var sid = thisEl.find('[name="sid"]').text();
+        if (sid) {
+            thisEl.find('[href="#accounts"],[href="#budget"]').closest('li').removeClass('disabled');
+        }else{
+            thisEl.find('[href="#accounts"],[href="#budget"]').closest('li').addClass('disabled');
+        }
+      }
+      tabsLock();
+
+
+
+      var btnNewContract = thisEl.find('#btn-new-contract');
+      function contResult(contThisEl) {
+        var cid = contThisEl.find('[name=cid]').text();
+        if (cid) {
+          var currcidEL = thisEl.find('[name=currcid]');
+          var dataHref = currcidEL.attr('data-href');
+          dataHref = dataHref.split('=')[0];
+          currcidEL.attr('data-href',dataHref+'='+cid);
+          currcidEL.text(cid);
+          var cdate = getValElement(contThisEl.find('[name=cdate]'));
+          thisEl.find('[name=cdate]').text(cdate);
+        }
+      }
+      function getData(contThisEl) {
+        contThisEl.form('option','whenCloseForm',contResult)
+        var out = {
+          customer : thisEl.find('[name=sid]').text(),
+          uname: getValElement(thisEl.find('[name=sname]')),
+        }
+        return out;
+      }
+      btnNewContract.data({ importData: getData });
+
+
+      function detDataForAcc(accThisEl) {
+        var sidEl = accThisEl.find('[name=sid]');
+        var sid = thisEl.find('[name=sid]').text();
+        sidEl.text(sid).attr('data-href',sidEl.attr('data-href')+sid);
+        accThisEl.find('[name=sname]').text( thisEl.find('[name=sname]').val());
+        sidEl.closest('.row').removeClass('subrow');
+      }
+
+      var showTab = (ev,ui)=>{
+        var sid = thisEl.find('[name=sid]').text();
+        if (ev.currentTarget.hash == "#accounts") {
+          var accJourEl =  thisEl.find('#accounts .journal');
+          var links = accJourEl.journal('option','links');
+
+          if (! links) {
+            var lnk = 'is_deleted = 0 && sid = '+sid;
+            accJourEl.journal('option','links',lnk);
+          }
+
+          // \s+sid\s=\s\d+
+          // var t = /\s+sid\s=\s\d+/;
+          // if (t.test(links)) {
+          //   links.replace(t,'sid = '+sid);
+          // }else{
+          //   if (links) {
+          //     accJourEl.journal('option','links',links + ' && '+'sid = '+sid);
+          //   }else{
+          //     accJourEl.journal('option','links','is_deleted = 0 && '+'sid = '+sid);
+          //   }
+          // }
+
+          accJourEl.journal('applyFilter',0);
+          this.element.find('#accounts #new-element').data({importData:detDataForAcc});
+
+
+        }else if (ev.currentTarget.hash == "#budget") {
+
+          var bugJourEl = thisEl.find('#budget .journal');
+          var links = bugJourEl.journal('option','links');
+          console.log('links ===========',links);
+          if (! links) {
+            var lnk = 'is_deleted = 0 && ( budgetrules.source@accounts.sid = '+sid+' || budgetrules.dest@accounts.sid = '+sid+' )';
+            bugJourEl.journal('option','links',lnk);
+          }
+
+
+          // \s+sid\s=\s\d+
+          // var t = /budgetrules.\w+@accounts.sid\s=\s\d+/;
+          // if (t.test(links)) {
+          //
+          //   links.replace(t,'sid = '+sid);
+          // }else{
+          //   if (links) {
+          //     bugJourEl.journal('option','links',links + ' && '+'sid = '+sid);
+          //   }else{
+          //     bugJourEl.journal('option','links','is_deleted = 0 && '+'sid = '+sid);
+          //   }
+          // }
+
+          bugJourEl.journal('applyFilter',0);
+        }
+      }
+      thisEl.find('.formtabs').wintabs( "option","activate", showTab);
+
+      thisEl.find('#budget .journal').journal('option','sel_fields','brid, name, type, source, dest, is_deleted');
+    }
+
+}
+
+
+
+
+
+
+
+
+
 var budgetrules_form =  {
 
   whenEndLoad:function () {

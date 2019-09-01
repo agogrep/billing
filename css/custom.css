@@ -95,3 +95,24 @@ margin-left: 6px;
   color: white;
   fill: white;
 }
+
+#contracbox.selectionbox{
+  /* width: 350px; */
+}
+
+#btn-new-contract{
+  position: relative;
+  right: 0;
+  float: right;
+  height: 24px;
+  width: 22px;
+  margin: 2px;
+}
+#btn-new-contract svg{
+  height: 22px;
+  width: 22px;
+  fill: var(--e1_col);
+}
+#btn-new-contract svg:hover{
+    fill: black;
+}

@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<script>
+    <masterfield>slid</masterfield>
+    <part>
+      <name>main</name>
+      <section>
+        <parentselector>.//*[@id="main"]</parentselector>
+        <selector>.//*[@id="form"]</selector>
+        <repeat>0</repeat>
+      </section>
+      <sql>
+        <readquery>SELECT * FROM sublabels WHERE slid = {slid}</readquery>
+        <writequery>
+        </writequery>
+        <writegenerator>
+          <scriptname>write</scriptname>
+          <param>
+            <table>sublabels</table>
+            <id_name>slid</id_name>
+          </param>
+        </writegenerator>
+        <argument>
+          <slid><type>int</type><long></long><default></default></slid>
+          <slname><type>str</type><long></long><default></default></slname>
+          <descr><type>str</type><long></long><default></default></descr>
+        </argument>
+      </sql>
+      <layout>
+        <element><selector>.//*[@name="slid"]</selector><attribute></attribute><fild>slid</fild></element>
+        <element><selector>.//*[@name="slname"]</selector><attribute>value</attribute><fild>slname</fild></element>
+        <element><selector>.//*[@name="descr"]</selector><attribute>value</attribute><fild>descr</fild></element>
+      </layout>
+    </part>
+    <part></part>
+  </script>

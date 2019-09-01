@@ -12,17 +12,17 @@
       </section>
       <sql>
         <readquery>
-          SELECT a.aid, a.aname, a.curr, a.side, a.usebal, a.descr,
-                  a.apbal, tc.cred, td.debt, (a.apbal+td.debt-tc.cred) balance, a.is_deleted
-          FROM (SELECT aid, apbal, aname,curr,side,usebal,descr, is_deleted
+          SELECT m.aid, m.aname, m.curr, m.side, m.usebal, m.descr,
+                  m.apbal, m.cred, m.debt, (m.apbal+m.debt-m.cred) balance, IFNULL(m.sid,'') sid , m.iban, m.is_deleted, IFNULL(s.sname,'')  sname
+                  FROM (SELECT * FROM (SELECT aid, apbal, aname,curr,side,usebal,descr, sid, iban, is_deleted
                       FROM accounts WHERE aid = {aid}) a,
                     (SELECT if (Sum(minus) &gt; 0,Sum(minus),0) as cred
                           FROM transactions WHERE source = {aid} AND
                           IFNULL((SELECT apdate FROM actpoints order by apdate desc LIMIT 1),0) &lt; tdate AND accept = 1) tc,
                     (SELECT if (Sum(plus) &gt; 0,Sum(plus),0) as debt
                           FROM transactions WHERE dest = {aid} AND
-                          IFNULL((SELECT apdate FROM actpoints order by apdate desc LIMIT 1),0) &lt; tdate AND accept = 1)  td
-
+                          IFNULL((SELECT apdate FROM actpoints order by apdate desc LIMIT 1),0) &lt; tdate AND accept = 1)  td) m
+          LEFT OUTER JOIN (SELECT sid, sname  FROM subjects) s USING(sid);
         </readquery>
         <writequery>
         </writequery>
@@ -34,54 +34,19 @@
           </param>
         </writegenerator>
         <argument>
-          <aid>
-            <type>int</type>
-            <long></long>
-            <default></default>
-          </aid>
-          <aname>
-            <type>str</type>
-            <long></long>
-            <default></default>
-          </aname>
-          <curr>
-            <type>str</type>
-            <long></long>
-            <default></default>
-          </curr>
-          <side>
-            <type>int</type>
-            <long></long>
-            <default></default>
-<!--баг !!!!!!!!!!!!! -->
-<!-- не правильно работает default при сохранении -->
-
-          </side>
-          <usebal>
-            <type>int</type>
-            <long></long>
-            <default>1</default>
-          </usebal>
-          <apdate>
-            <type>datetime</type>
-            <long></long>
-            <default></default>
-          </apdate>
-          <apbal>
-            <type>int</type>
-            <long></long>
-            <default></default>
-          </apbal>
-          <descr>
-            <type>str</type>
-            <long></long>
-            <default></default>
-          </descr>
-          <balance>
-            <type>int</type>
-            <long></long>
-            <default></default>
-          </balance>
+          <aid><type>int</type><long></long><default></default></aid>
+          <aname><type>str</type><long></long><default></default></aname>
+          <curr><type>str</type><long></long><default></default></curr>
+          <side><type>int</type><long></long><default></default></side>
+          <!--баг !!!!!!!!!!!!! -->
+          <!-- не правильно работает default при сохранении -->
+          <usebal><type>int</type><long></long><default>1</default></usebal>
+          <apdate><type>datetime</type><long></long><default></default></apdate>
+          <apbal><type>int</type><long></long><default></default></apbal>
+          <descr><type>str</type><long></long><default></default></descr>
+          <balance><type>int</type><long></long><default></default></balance>
+          <sid><type>int</type><long></long><default></default></sid>
+          <iban><type>str</type><long></long><default></default></iban>
         </argument>
       </sql>
 
@@ -130,6 +95,26 @@
             <selector>.//*[@name="balance"]</selector>
             <attribute></attribute>
             <fild></fild>
+          </element>
+          <element>
+            <selector>.//*[@name="sid"]</selector>
+            <attribute></attribute>
+            <fild>sid</fild>
+          </element>
+          <element>
+            <selector>.//*[@name="sid"]</selector>
+            <attribute>data-href</attribute>
+            <fild>sid</fild>
+          </element>
+          <element>
+            <selector>.//*[@name="sname"]</selector>
+            <attribute></attribute>
+            <fild>sname</fild>
+          </element>
+          <element>
+            <selector>.//*[@name="iban"]</selector>
+            <attribute>value</attribute>
+            <fild>iban</fild>
           </element>
       </layout>
     </part>

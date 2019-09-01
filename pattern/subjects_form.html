@@ -1,0 +1,119 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <div class="target form" id ='main'>
+      <div class="main formsection" id ='form' >
+         <div id ='sysmessage'></div>
+
+         <div class ="formtabs">
+          <ul>
+            <li><a href="#basic">basic</a></li>
+            <li><a href="#accounts">accounts</a></li>
+            <li><a href="#budget">budget</a></li>
+          </ul>
+          <div id="basic">
+              <div name="sid" class="main master autolabel infofield"  type="number" >{sid}</div>
+              <input name="sname" class="main  autolabel" value="">
+              <input name="sfullname" class="main  autolabel" value="">
+              <input name="inn" class="main  autolabel" value="">
+              <select name="stype" class = 'main combobox autolabel' data-enumerations = 'typesubject'  value=""></select>
+              <input name="regnum" class="main  autolabel" value="">
+              <input name="regdate" class = 'main datetimebox  autolabel' type="text"  value="">
+              <select name="taxation" class = 'main combobox autolabel' data-enumerations = 'taxation'  value=""></select>
+              <input name="admin" class="main  autolabel" value="">
+              <textarea name="contacts"  class="main autolabel">{contacts}</textarea>
+
+              <div  class = 'selectionbox' id = 'contracbox'>
+                 <div id="btn-new-contract" class = "ripple dialog" data-typedialog = "form" data-href = "/contracts_form/?new=0" ><svg><use xlink:href="/file/ico/sprite.svg#record_plus"></use></svg></div>
+                 <div id = 'btn-currcid' type="button"
+                          class = 'dialog button-select ripple'
+                           data-typedialog = 'selectItems'
+                           data-choicemode = 'one'
+                           data-masterfield = 'cid'
+                           data-path = '/contracts_list/'
+                           data-countrows =  12
+                           data-links = ''
+                           data-relationship = '#currcid'>
+                           <svg><use xlink:href="/file/ico/sprite.svg#three-point"></use></svg>
+                   </div>
+
+               <div class = 'selectionbox-label lang flup'>currcid</div>
+                <div id = 'currcid' class = 'selectionvalue' >
+                 <div class = 'row'>
+                   <div name="currcid" data-asname = 'cid' class="main dialog" data-typedialog = 'form' data-href = "/contracts_form/?cid={currcid}" >{currcid}</div>
+                   <div name = "cdate" >{cdate}</div>
+                 </div>
+               </div>
+              </div>
+
+              <div  class = 'selectionbox'>
+                 <div id = 'btn-sgid' type="button"
+                          class = 'dialog button-select ripple'
+                           data-typedialog = 'selectItems'
+                           data-choicemode = 'one'
+                           data-masterfield = 'sgid'
+                           data-path = '/subgroups_list/'
+                           data-countrows =  12
+                           data-links = ''
+                           data-relationship = '#subgroups'>
+                           <svg><use xlink:href="/file/ico/sprite.svg#three-point"></use></svg>
+                   </div>
+               <div class = 'selectionbox-label lang flup'>subgroups</div>
+                <div id = 'subgroups' class = 'selectionvalue' >
+                 <div class = 'row'>
+                   <div name="sgid" data-href = "/subgroups_form/?sgid={sgid}" data-typedialog = 'form'  class="main dialog" >{sgid}</div>
+                   <div name = "sgname" >{sgname}</div>
+                 </div>
+               </div>
+              </div>
+
+              <input name="descr" class="main  autolabel" value="">
+
+              <div class = 'selectionbox' style="max-width: 394px;">
+                <div class = 'dialog button-select'
+                        data-typedialog = 'selectItems'
+                        data-choicemode = 'multi'
+                        data-masterfield = 'slid'
+                        data-path = '/sublabels_list/'
+                        data-countrows =  12
+                        data-relationship = '#sublabels'>
+                <svg><use xlink:href="/file/ico/sprite.svg#three-point"></use></svg>
+                </div>
+                <div class = 'selectionbox-label flup'>sublabels</div>
+                <div id = 'sublabels' class='form'>
+                   <div class='sublabels row formsection' name = 'row'>
+                      <div name="ssid" class = 'sublabels hidfeild' >{ssid}</div>
+                      <div name="slid" class = 'sublabels dialog ' data-typedialog = 'form' data-href='/sublabels_form/?slid={slid}' >{slid}</div>
+                      <div name="slname" class = 'sublabels lang' >{slname}</div>
+                   </div>
+               </div>
+              </div>
+          </div>
+
+          <div id="accounts">
+            <div class = 'journal ' style="max-width: 500px;"
+                  data-use-control-panel = 1
+                  data-masterfield = 'aid'
+                  data-path = "/accounts_list/"
+                  data-countrows =  12
+                  >
+            </div>
+          </div>
+
+          <div id="budget">
+            <div class = 'journal' style="max-width: 500px;"
+                  data-use-control-panel = 1
+                  data-masterfield = 'brid'
+                  data-path = "/budgetrules_list/"
+                  data-countrows =  12
+                  >
+            </div>
+          </div>
+
+        </div>
+       </div>
+     </div>
+   </body>
+</html>

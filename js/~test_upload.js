@@ -3,7 +3,7 @@ function customScript() {
     var floadEl = $('#upload');
     var file = floadEl[0].files[0];
 
-    autoCompleteDocuments(file,'fillContract',{cid:3})
+    autoCompleteDocuments(file,'fillContract',{cid:1})
   });
 
 

@@ -32,6 +32,8 @@ CREATE TABLE `accounts` (
   `descr` varchar(255) DEFAULT NULL,
   `usebal` tinyint(4) DEFAULT '1',
   `is_deleted` tinyint(1) NOT NULL DEFAULT '0',
+  `sid` smallint(6) DEFAULT NULL,
+  `iban` varchar(40) NOT NULL DEFAULT '',
   PRIMARY KEY (`aid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -97,6 +99,8 @@ CREATE TABLE `budgetrules` (
   `enddate` datetime NOT NULL,
   `rpid` smallint(5) unsigned NOT NULL,
   `is_deleted` tinyint(1) NOT NULL DEFAULT '0',
+  `name` varchar(40) DEFAULT NULL,
+  `track` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`brid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -114,6 +118,27 @@ CREATE TABLE `cassapoints` (
   `curr` char(3) DEFAULT NULL,
   `apbal` decimal(10,3) DEFAULT '0.000',
   PRIMARY KEY (`cpid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `contracts`
+--
+
+DROP TABLE IF EXISTS `contracts`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `contracts` (
+  `cid` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `cdate` date NOT NULL,
+  `enddate` date NOT NULL,
+  `contractor` smallint(6) DEFAULT NULL COMMENT 'sid',
+  `customer` smallint(6) DEFAULT NULL COMMENT 'sid',
+  `budget` smallint(6) DEFAULT NULL COMMENT 'brid',
+  `cdata` text COMMENT 'parametrs for reportscripts (json)',
+  `descr` varchar(255) DEFAULT NULL,
+  `is_deleted` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`cid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -294,6 +319,81 @@ CREATE TABLE `reportscripts` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `slid_sid`
+--
+
+DROP TABLE IF EXISTS `slid_sid`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `slid_sid` (
+  `ssid` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `slid` smallint(5) DEFAULT NULL,
+  `sid` smallint(5) DEFAULT NULL,
+  `def` tinyint(4) DEFAULT NULL,
+  `descr` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ssid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `subgroups`
+--
+
+DROP TABLE IF EXISTS `subgroups`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `subgroups` (
+  `sgid` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `sgname` varchar(40) DEFAULT NULL,
+  `descr` varchar(255) DEFAULT NULL,
+  `is_deleted` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`sgid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `subjects`
+--
+
+DROP TABLE IF EXISTS `subjects`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `subjects` (
+  `sid` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `sname` varchar(40) DEFAULT NULL,
+  `sfullname` varchar(255) DEFAULT NULL,
+  `inn` smallint(10) NOT NULL COMMENT 'EDRPOU or IIN',
+  `stype` varchar(7) NOT NULL DEFAULT 'IE',
+  `regnum` smallint(10) NOT NULL COMMENT 'registry entry number',
+  `regdate` date NOT NULL,
+  `taxation` varchar(10) NOT NULL COMMENT 'type of taxation: enumeration  common / simpl (simplified)',
+  `admin` varchar(255) NOT NULL,
+  `sgid` smallint(6) NOT NULL COMMENT 'sgroups',
+  `contacts` text NOT NULL,
+  `currcid` smallint(6) NOT NULL COMMENT 'cid - current contracts',
+  `descr` varchar(255) DEFAULT NULL,
+  `is_deleted` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`sid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `sublabels`
+--
+
+DROP TABLE IF EXISTS `sublabels`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sublabels` (
+  `slid` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `slname` varchar(20) DEFAULT NULL,
+  `descr` varchar(255) DEFAULT NULL,
+  `is_deleted` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`slid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `temp_accounts`
 --
 
@@ -463,4 +563,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-07-31  0:00:07
+-- Dump completed on 2019-08-25  0:00:04

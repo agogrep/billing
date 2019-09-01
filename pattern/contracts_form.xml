@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<script>
+    <masterfield>cid</masterfield>
+    <part>
+      <name>main</name>
+      <section>
+        <parentselector>.//*[@id="main"]</parentselector>
+        <selector>.//*[@id="form"]</selector>
+        <repeat>0</repeat>
+      </section>
+      <sql>
+        <readquery>SELECT  c.cid,
+                            c.cdate,
+                            c.enddate,
+                            IF(c.contractor=0,'',c.contractor) contractor,
+                            IFNULL(o.sname,'') oname,
+                            IF(c.customer=0,'',c.customer) customer,
+                            IFNULL(u.sname,'') uname,
+                            IF(c.budget=0,'',c.budget) budget,
+                            IFNULL(b.name,'') name,
+                            c.cdata,
+                            c.descr
+                    FROM contracts c
+                    LEFT OUTER JOIN subjects o ON c.contractor = o.sid
+                    LEFT OUTER JOIN subjects u ON c.customer = u.sid
+                    LEFT OUTER JOIN budgetrules b ON c.budget = b.brid
+                    WHERE c.cid = {cid}
+        </readquery>
+        <writequery>
+        </writequery>
+        <writegenerator>
+          <scriptname>write</scriptname>
+          <param>
+            <table>contracts</table>
+            <id_name>cid</id_name>
+          </param>
+        </writegenerator>
+        <argument>
+          <cid><type>int</type><long></long><default></default></cid>
+          <cdate><type>str</type><long></long><default></default></cdate>
+          <enddate><type>str</type><long></long><default></default></enddate>
+          <contractor><type>int</type><long></long><default></default></contractor>
+          <oname><type>str</type><long></long><default></default></oname>
+          <customer><type>int</type><long></long><default></default></customer>
+          <uname><type>str</type><long></long><default></default></uname>
+          <budget><type>int</type><long></long><default></default></budget>
+          <name><type>str</type><long></long><default></default></name>
+          <cdata><type>str</type><long></long><default></default></cdata>
+          <descr><type>str</type><long></long><default></default></descr>
+        </argument>
+      </sql>
+      <layout>
+        <element><selector>.//*[@name="cid"]</selector><attribute></attribute><fild>cid</fild></element>
+        <element><selector>.//*[@name="cdate"]</selector><attribute>value</attribute><fild>cdate</fild></element>
+        <element><selector>.//*[@name="enddate"]</selector><attribute>value</attribute><fild>enddate</fild></element>
+        <element><selector>.//*[@name="contractor"]</selector><attribute></attribute><fild>contractor</fild></element>
+        <element><selector>.//*[@name="contractor"]</selector><attribute>data-href</attribute><fild>contractor</fild></element>
+        <element><selector>.//*[@name="oname"]</selector><attribute></attribute><fild>oname</fild></element>
+        <element><selector>.//*[@name="customer"]</selector><attribute></attribute><fild>customer</fild></element>
+        <element><selector>.//*[@name="customer"]</selector><attribute>data-href</attribute><fild>customer</fild></element>
+        <element><selector>.//*[@name="uname"]</selector><attribute></attribute><fild>uname</fild></element>
+        <element><selector>.//*[@name="budget"]</selector><attribute></attribute><fild>budget</fild></element>
+        <element><selector>.//*[@name="budget"]</selector><attribute>data-href</attribute><fild>budget</fild></element>
+        <element><selector>.//*[@name="name"]</selector><attribute></attribute><fild>name</fild></element>
+        <element><selector>.//*[@name="cdata"]</selector><attribute></attribute><fild>cdata</fild></element>
+        <element><selector>.//*[@name="descr"]</selector><attribute>value</attribute><fild>descr</fild></element>
+      </layout>
+    </part>
+    <part></part>
+  </script>

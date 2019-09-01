@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<script>
+    <masterfield>sgid</masterfield>
+    <part>
+      <name>main</name>
+      <section>
+        <parentselector>.//*[@id="main"]</parentselector>
+        <selector>.//*[@id="form"]</selector>
+        <repeat>0</repeat>
+      </section>
+      <sql>
+        <readquery>SELECT * FROM subgroups WHERE sgid = {sgid}</readquery>
+        <writequery>
+        </writequery>
+        <writegenerator>
+          <scriptname>write</scriptname>
+          <param>
+            <table>subgroups</table>
+            <id_name>sgid</id_name>
+          </param>
+        </writegenerator>
+        <argument>
+          <sgid><type>int</type><long></long><default></default></sgid>
+          <sgname><type>str</type><long></long><default></default></sgname>
+          <descr><type>str</type><long></long><default></default></descr>
+        </argument>
+      </sql>
+      <layout>
+        <element><selector>.//*[@name="sgid"]</selector><attribute></attribute><fild>sgid</fild></element>
+        <element><selector>.//*[@name="sgname"]</selector><attribute>value</attribute><fild>sgname</fild></element>
+        <element><selector>.//*[@name="descr"]</selector><attribute>value</attribute><fild>descr</fild></element>
+      </layout>
+    </part>
+    <part></part>
+  </script>

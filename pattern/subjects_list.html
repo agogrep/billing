@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+</head>
+<body id ='root'>
+  <div id = 'subjects'
+        class = 'journal'
+        data-masterfield = 'sid'
+        data-path = "/subjects_list/">
+    <div class='row' name = 'row'>
+       <div name="sid" class = 'dialog link ripple'
+            data-typedialog = 'form'
+            data-href='/subjects_form/?sid={sid}'>{sid}</div>
+       <div name="sname" class = "flup">{sname}</div>
+       <div name="descr">{descr}</div>
+     </div>
+  </div>
+</body>
+</html>

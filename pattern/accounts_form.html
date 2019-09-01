@@ -20,6 +20,7 @@
          <select class = 'main combobox autolabel' data-enumerations = 'side' name="side" value=""></select>
          <select class = 'main combobox autolabel' data-enumerations = 'use_balance' name="usebal" value=""></select>
          <!-- <div class = 'main datetimebox autolabel' name="apdate" value=""></div> -->
+         <input class="main autolabel"  type="text"  name="iban" value="">
          <input class="main autolabel"  type="number"  name="apbal" value="">
          <div class = 'autolabel infofield' name="balance" value="">{balance}</div>
          <input class = 'main autolabel' name="descr" value="">
@@ -65,6 +66,25 @@
              </div>
          </div>
         </div>
+
+        <div class = 'selectionbox' style="max-width: 394px;">
+          <div class = 'dialog button-select'
+                  data-typedialog = 'selectItems'
+                  data-choicemode = 'one'
+                  data-masterfield = 'sid'
+                  data-path = '/subjects_list/'
+                  data-countrows =  12
+                  data-relationship = '#subjects'>
+           <svg><use xlink:href="/file/ico/sprite.svg#three-point"></use></svg>
+           </div>
+         <div class = 'selectionbox-label flup'>subjects</div>
+         <div id = 'subjects' class='selectionvalue'>
+            <div class='row'>
+               <div class = 'main dialog ' data-typedialog = 'form' data-href='/subjects_form/?sid={sid}' name="sid">{sid}</div>
+               <div name="sname">{sname}</div>
+            </div>
+        </div>
+       </div>
 
        </div>
      </div>

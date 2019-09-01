@@ -21,7 +21,7 @@
 
 LOCK TABLES `agog` WRITE;
 /*!40000 ALTER TABLE `agog` DISABLE KEYS */;
-INSERT INTO `agog` VALUES (1,'uid_aid','uid','users','link','',0,0),(2,'uid_aid','aid','accounts','link','',0,0),(3,'lid_aid','aid','accounts','link','',0,0),(4,'lid_aid','lid','labels','link','',0,0),(5,'transactions','source','accounts','','',0,0),(6,'transactions','dest','accounts','','',0,0),(7,'transactions','scassa','users','','',0,0),(8,'transactions','dcassa','users','','',0,0),(9,'transactions','uid','users','','',0,0),(10,'transactions','tfid','transactions_formpre','','',0,0),(11,'transactions_formpre','defsour','accounts','','',0,0),(12,'transactions_formpre','defdest','accounts','','',0,0),(13,'transactions_formpre','uid','users','','',0,0),(14,'budgetrules','rsid','reportscripts','','',0,0),(15,'budgetrules','source','accounts','','',0,0),(16,'budgetrules','dest','accounts','','',0,0),(17,'budgetrules','uid','users','','',0,0),(19,'accounts','curr','','','currency',0,0),(20,'accounts','side','','','side',0,0),(21,'accounts','usebal','','','use_balance',0,0),(22,'transactions','tcurr','','','currency',0,0),(23,'budgetrules','type','','','mode_budgetrule',0,0),(24,'accounts','aname','','','',1,0),(25,'labels','lname','','','',1,0),(26,'transactions','tdate','','','',1,0),(27,'users','login','','','',1,0),(28,'reportpresets','rpname','','','',1,0),(29,'journalpresets','jpname','','','',1,0),(30,'transactions_formpre','tfname','','','',1,0);
+INSERT INTO `agog` VALUES (1,'uid_aid','uid','users','link','',0,0),(2,'uid_aid','aid','accounts','link','',0,0),(3,'lid_aid','aid','accounts','link','',0,0),(4,'lid_aid','lid','labels','link','',0,0),(5,'transactions','source','accounts','','',0,0),(6,'transactions','dest','accounts','','',0,0),(7,'transactions','scassa','users','','',0,0),(8,'transactions','dcassa','users','','',0,0),(9,'transactions','uid','users','','',0,0),(10,'transactions','tfid','transactions_formpre','','',0,0),(11,'transactions_formpre','defsour','accounts','','',0,0),(12,'transactions_formpre','defdest','accounts','','',0,0),(13,'transactions_formpre','uid','users','','',0,0),(14,'budgetrules','rsid','reportscripts','','',0,0),(15,'budgetrules','source','accounts','','',0,0),(16,'budgetrules','dest','accounts','','',0,0),(17,'budgetrules','uid','users','','',0,0),(19,'accounts','curr','','','currency',0,0),(20,'accounts','side','','','side',0,0),(21,'accounts','usebal','','','use_balance',0,0),(22,'transactions','tcurr','','','currency',0,0),(23,'budgetrules','type','','','mode_budgetrule',0,0),(24,'accounts','aname','','','',1,0),(25,'labels','lname','','','',1,0),(26,'transactions','tdate','','','',1,0),(27,'users','login','','','',1,0),(28,'reportpresets','rpname','','','',1,0),(29,'journalpresets','jpname','','','',1,0),(30,'transactions_formpre','tfname','','','',1,0),(31,'slid_sid','slid','sublabels','link','',0,0),(32,'slid_sid','sid','subjects','link','',0,0),(33,'subjects','sgid','subgroups','','',0,0),(34,'subjects','currcid','contracts','','',0,0),(35,'contracts','contractor','subjects','','',0,0),(36,'contracts','customer','subjects','','',0,0),(37,'contracts','budget','budgetrules','','',0,0),(38,'subjects','stype','','','typesubject',0,0),(39,'subjects','taxation','','','taxation',0,0),(40,'subjects','sname','','','',1,0),(41,'sublabels','slname','','','',1,0),(42,'subgroups','sgname','','','',1,0),(43,'contracts','cdate','','','',1,0);
 /*!40000 ALTER TABLE `agog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -31,7 +31,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `enumerations` WRITE;
 /*!40000 ALTER TABLE `enumerations` DISABLE KEYS */;
-INSERT INTO `enumerations` VALUES (1,'currency','UAN','UAN',0),(2,'currency','USD','USD',0),(3,'side','INNER','0',0),(4,'side','OUTER','1',0),(5,'use_balance','USE','1',0),(6,'use_balance','NOT','0',0),(7,'mode_budgetrule','ANALYTIC','0',0),(8,'mode_budgetrule','DEFER','1',0),(9,'mode_budgetrule','AUTODEFER','2',0);
+INSERT INTO `enumerations` VALUES (1,'currency','UAN','UAN',0),(2,'currency','USD','USD',0),(3,'side','INNER','0',0),(4,'side','OUTER','1',0),(5,'use_balance','USE','1',0),(6,'use_balance','NOT','0',0),(7,'mode_budgetrule','ANALYTIC','0',0),(8,'mode_budgetrule','DEFER','1',0),(9,'mode_budgetrule','AUTODEFER','2',0),(10,'typesubject','ENTITY','ENTITY',0),(11,'typesubject','IE','IE',0),(12,'taxation','common','common',0),(13,'taxation','simpl','simpl',0);
 /*!40000 ALTER TABLE `enumerations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-07-31  0:00:07
+-- Dump completed on 2019-08-25  0:00:04

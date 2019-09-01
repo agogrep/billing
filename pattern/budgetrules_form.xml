@@ -12,7 +12,7 @@
         <readquery>SELECT b.brid,b.name, b.track, b.brdate,b.script,b.rsid,b.rparam,
         b.source, s.aname sourcename, s.curr sourcecurr, s.side sourceside, s.usebal sourceusebal,
         b.dest, d.aname destname, d.curr destcurr, d.side destside, d.usebal destusebal,
-        r.sysname,
+        r.sysname, b.is_deleted,
         b.sum,b.type,b.priority,b.rpid,b.schedule FROM budgetrules b
         LEFT OUTER JOIN accounts s ON s.aid = b.source
         LEFT OUTER JOIN accounts d ON d.aid = b.dest
