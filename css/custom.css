@@ -64,9 +64,11 @@ input[type="file"] {
 
 
 .file_load_box i{
-  display: block;
-margin-top: 3px;
-margin-left: 6px;
+  /* display: block; */
+  margin-top: 3px;
+  margin-left: 6px;
+  position: relative;
+  top: 4px;
 }
 
 .file_load_box {
@@ -87,6 +89,8 @@ margin-left: 6px;
 .file_load_box p{
   float: right;
   padding: 2px;
+  position: relative;
+  top: 4px;
 }
 
 

@@ -2,7 +2,7 @@ from agog import db
 from mailmerge import MailMerge
 
 
-def fillContract(fileName,cid):
+def fillContract(fileName, cid):
     base = db.dbSql()
     sql = '''
         SELECT
