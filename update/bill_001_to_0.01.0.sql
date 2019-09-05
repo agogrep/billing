@@ -80,3 +80,5 @@ INSERT into agog (main,field,relation) VALUES ('subjects','sgid','subgroups'),
 INSERT into agog (main,field,enumeration) VALUES ('subjects','stype','typesubject'),('subjects','taxation','taxation');
 INSERT into agog (main,field,showprimary) VALUES ('subjects','sname',1),('sublabels','slname',1),
 ('subgroups','sgname',1),('contracts','cdate',1);
+
+UPDATE passport_db SET version = "0.01.0";

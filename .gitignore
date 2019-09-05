@@ -11,3 +11,5 @@ backup/temp/*
 
 profiles/*
 !profiles/default/
+
+py/agog/__pycache__/*
