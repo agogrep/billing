@@ -132,9 +132,9 @@ CREATE TABLE `contracts` (
   `cid` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
   `cdate` date NOT NULL,
   `enddate` date NOT NULL,
-  `contractor` smallint(6) DEFAULT NULL COMMENT 'sid',
-  `customer` smallint(6) DEFAULT NULL COMMENT 'sid',
-  `budget` smallint(6) DEFAULT NULL COMMENT 'brid',
+  `contractor` smallint(6) DEFAULT NULL,
+  `customer` smallint(6) DEFAULT NULL,
+  `budget` smallint(6) DEFAULT NULL,
   `cdata` text COMMENT 'parametrs for reportscripts (json)',
   `descr` varchar(255) DEFAULT NULL,
   `is_deleted` tinyint(1) NOT NULL DEFAULT '0',
@@ -370,7 +370,7 @@ CREATE TABLE `subjects` (
   `admin` varchar(255) NOT NULL,
   `sgid` smallint(6) NOT NULL COMMENT 'sgroups',
   `contacts` text NOT NULL,
-  `currcid` smallint(6) NOT NULL COMMENT 'cid - current contracts',
+  `currcid` smallint(6) DEFAULT NULL,
   `descr` varchar(255) DEFAULT NULL,
   `is_deleted` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`sid`)
@@ -410,6 +410,8 @@ CREATE TABLE `temp_accounts` (
   `apbal` decimal(10,3) DEFAULT '0.000',
   `descr` varchar(255) DEFAULT NULL,
   `is_deleted` tinyint(1) NOT NULL DEFAULT '0',
+  `sid` smallint(6) DEFAULT NULL,
+  `iban` varchar(40) NOT NULL DEFAULT '',
   PRIMARY KEY (`aid`)
 ) ENGINE=MEMORY DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -563,4 +565,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-08-25  0:00:04
+-- Dump completed on 2019-09-06 12:56:37

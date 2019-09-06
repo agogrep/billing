@@ -28,7 +28,7 @@ var contracts_form = {
 
     var btnFill = this.element.find('#btn_fill');
     btnFill.change(()=>{
-      console.log('btnFill.change(()=>{',thisEl.find('[name="cid"]').text());
+      // console.log('btnFill.change(()=>{',thisEl.find('[name="cid"]').text());
       var cid = thisEl.find('[name="cid"]').text();
       if (cid) {
         var file = btnFill[0].files[0];
@@ -134,7 +134,7 @@ var subjects_form = {
 
           var bugJourEl = thisEl.find('#budget .journal');
           var links = bugJourEl.journal('option','links');
-          console.log('links ===========',links);
+          // console.log('links ===========',links);
           if (! links) {
             var lnk = 'is_deleted = 0 && ( budgetrules.source@accounts.sid = '+sid+' || budgetrules.dest@accounts.sid = '+sid+' )';
             bugJourEl.journal('option','links',lnk);
@@ -269,26 +269,7 @@ var transactions_form =  {
   _sourceExtLink:'',
   _reserveCassaBox:{},
   whenEndLoad:function () {
-      // var tfidEl = this.element.find('[name=tfid]');
-      // var tfid = getValElement(tfidEl);
-      // if (!tfid) {
-      //   tfidEl.text(this.curPresID);
-      // }else{
-      //   this.curPresID = Number(tfid);
-      // }
-      // if ('transactions_formpreset' in serviceData.presets) {
-      //   for (var i = 0; i < serviceData.presets.transactions_formpreset.length; i++) {
-      //     if (serviceData.presets.transactions_formpreset[i].tfid == this.curPresID) {
-      //       this.curPreset = serviceData.presets.transactions_formpreset[i];
-      //       this.settingApp();
-      //     }
-      //   }// закончить установку событий
-      // }
-      // var data = $(this.element.form('option','relationshipElement','prevObject')).data()
-      // console.log('data',this.element.form('option','relationshipElement').data());
 
-
-      // load from external source
       var data = this.element.form('option','relationshipElement').data();
       if ('importData' in data) {
 
@@ -350,6 +331,7 @@ var transactions_form =  {
   },
 
     dependenceSideUsebal:function(mode) {
+      // console.log('dependenceSideUsebal',mode);
       // mode =  'read' 'set'
     /* устанавливает отношение minus и plus в зависимости от настроек account*/
       var minusEl = this.element.find('[name=minus]');
@@ -424,7 +406,12 @@ var transactions_form =  {
               }
               plusEl.val(0);
             }
+        }
 
+          minusEl.unbind();
+          plusEl.unbind();
+
+          // console.log(sourceside,destside,sourceusebal,destusebal);
           if ((sourceside==0)&&
               (destside==0)&&
               (sourceusebal==1)&&
@@ -444,12 +431,13 @@ var transactions_form =  {
                     descr.val('exchange rate ');
                   }
                 });
-              }else{
-                minusEl.unbind();
-                plusEl.unbind();
-          }
+              }
+          //     else{
+          //       minusEl.unbind();
+          //       plusEl.unbind();
+          // }
 
-        }
+        // }
 
 
 

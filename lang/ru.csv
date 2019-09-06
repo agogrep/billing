@@ -146,7 +146,7 @@ thursday ;четверг;
 friday ;пятница;
 saturday;суббота;
 sunday ;воскресенье;
-basic;одсновные;
+basic;основные;
 based_on_the_report;на основании отчета;
 schedule;расписание;
 period;период;
@@ -188,3 +188,44 @@ consumption;расход;
 arrival_in_a_month;приход за месяц;
 monthly_consumption;расход за месяц;
 earnings;доход;
+track;следить;
+sfullname;п.название;полное название
+inn;INN;идентификационный код
+stype;тип;тип субъекта
+regnum;рег.номер;регистрационный номер
+regdate;дата рег.;дата регистрации
+taxation;тип.нал.;тип налогооблажения
+admin;имя админ.;имя администратора
+sgid;id;id группы
+contacts;контакты;
+currcid;контракт;
+subjects;субъекты;
+sublabels;метки;
+slid;id;id метки
+slname;название;
+subgroups;группы;
+sgid;id;id группы
+sgname;название;
+contracts;контракты;
+cid;id;id контракта
+cdate;дата;
+contractor;исполнитель;
+customer;клиент;
+budget;бюджет;
+iban;IBAN;
+ENTITY;юр.лицо;
+IE;физ.лицо;
+common;общий;
+simpl;упрощенный;
+sname;название;
+sid;id;id субъекта
+template;шаблон;
+subject;субъект;
+help;помощник;
+fill_template;заполнить шаблон;
+tasks;задачи;
+sourcename;название;название источника
+destname;название;название назначения
+cal_amount;пере.сумма;пересчитанная сумма
+fixed_amount;фикс.сумма;фиксированная сумма
+performance;выполнение;

@@ -18,7 +18,7 @@ CREATE TABLE subjects
         descr VARCHAR(255),
         is_deleted tinyint(1) NOT NULL DEFAULT 0,
         CONSTRAINT pk_subjects PRIMARY KEY (sid)
-      );
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE sublabels
       (
@@ -27,7 +27,7 @@ CREATE TABLE sublabels
       	descr VARCHAR(255),
         is_deleted tinyint(1) NOT NULL DEFAULT 0,
         CONSTRAINT pk_sublabels PRIMARY KEY (slid)
-      );
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE slid_sid
         (
@@ -37,7 +37,7 @@ CREATE TABLE slid_sid
         def TINYINT,
         descr VARCHAR(255),
         CONSTRAINT pk_slid_sid PRIMARY KEY (ssid)
-        );
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE subgroups
       (
@@ -46,7 +46,7 @@ CREATE TABLE subgroups
         descr VARCHAR(255),
         is_deleted tinyint(1) NOT NULL DEFAULT 0,
         CONSTRAINT pk_subgroups PRIMARY KEY (sgid)
-      );
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE contracts
@@ -61,11 +61,14 @@ CREATE TABLE contracts
         descr VARCHAR(255),
         is_deleted tinyint(1) NOT NULL DEFAULT 0,
         CONSTRAINT pk_contracts PRIMARY KEY (cid)
-      );
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 ALTER TABLE accounts ADD COLUMN sid SMALLINT DEFAULT NULL;
 ALTER TABLE accounts ADD COLUMN iban VARCHAR(40) NOT NULL DEFAULT '';
+ALTER TABLE temp_accounts ADD COLUMN sid SMALLINT DEFAULT NULL;
+ALTER TABLE temp_accounts ADD COLUMN iban VARCHAR(40) NOT NULL DEFAULT '';
+
 
 INSERT into enumerations (enumname,name,value) VALUES ('typesubject','ENTITY','ENTITY');
 INSERT into enumerations (enumname,name,value) VALUES ('typesubject','IE','IE');

@@ -9,8 +9,8 @@
 
         <div class ="formtabs">
           <ul>
-            <li><a href="#basic">basic</a></li>
-            <li><a href="#template">template</a></li>
+            <li><a class = "lang" href="#basic">basic</a></li>
+            <li><a class = "lang" href="#template">template</a></li>
           </ul>
           <div id="basic">
             <div name="cid" class="main master autolabel infofield">{cid}</div>
@@ -28,7 +28,7 @@
                       data-relationship = '#contractor'>
                <svg><use xlink:href="/file/ico/sprite.svg#three-point"></use></svg>
                </div>
-             <div class = 'selectionbox-label flup'>contractor</div>
+             <div class = 'selectionbox-label lang flup'>contractor</div>
              <div id = 'contractor' class='selectionvalue'>
                 <div class='row'>
                    <div class = 'main dialog ' data-asname = 'sid' data-typedialog = 'form' data-href='/subjects_form/?sid={contractor}' name="contractor">{contractor}</div>
@@ -47,7 +47,7 @@
                      data-relationship = '#customer'>
               <svg><use xlink:href="/file/ico/sprite.svg#three-point"></use></svg>
               </div>
-            <div class = 'selectionbox-label flup'>customer</div>
+            <div class = 'selectionbox-label lang flup'>customer</div>
             <div id = 'customer' class='selectionvalue'>
                <div class='row'>
                   <div class = 'main dialog' data-asname = 'sid' data-typedialog = 'form' data-href='/subjects_form/?sid={customer}' name="customer">{customer}</div>
@@ -66,7 +66,7 @@
                     data-relationship = '#budget'>
              <svg><use xlink:href="/file/ico/sprite.svg#three-point"></use></svg>
              </div>
-           <div class = 'selectionbox-label flup'>budget</div>
+           <div class = 'selectionbox-label lang flup'>budget</div>
            <div id = 'budget' class='selectionvalue'>
               <div class='row'>
                  <div class = 'main dialog ' data-asname = 'brid' data-typedialog = 'form' data-href='/budgetrules_form/?brid={budget}' name="budget">{budget}</div>
@@ -77,11 +77,11 @@
         </div>
           <div id="template">
             <div class = "delimiter"></div>
-              <button class = 'dialog lang' style = "display: block;" data-typedialog = 'frame' data-href = "./page/help/autofill_contract.html">Help</button>
+              <button class = 'dialog lang' style = "display: block;" data-typedialog = 'frame' data-href = "./page/help/autofill_contract.html">help</button>
 
             <label class="file_load_box">
               <input id ="btn_fill" name = "btn_fill" type="file"/>
-              <i><svg style="width: 17px; height: 17px;"><use xlink:href="/file/ico/sprite.svg#folder-open"></use></svg><p>btn_fill</p></i>
+              <i><svg style="width: 17px; height: 17px;"><use xlink:href="/file/ico/sprite.svg#folder-open"></use></svg><p class = 'lang'>fill_template</p></i>
             </label>
 
             <textarea class="main hidden" name="cdata">{cdata}</textarea>

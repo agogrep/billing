@@ -106,7 +106,7 @@
             valList.push([ eid, fixed_amount? fixed_amount : 0  ]);
             // console.log(i,el);
           });
-          console.log(valList);
+          // console.log(valList);
 
           var out = [
             {
@@ -143,13 +143,13 @@
         this.element.find('#taskbox').click((ev)=>{
           if ('name' in ev.target.attributes) {
             var fixAmEl = $(ev.target);
-            console.log('fixAmEl',fixAmEl.parent()[0].id);
+            // console.log('fixAmEl',fixAmEl.parent()[0].id);
             var isTitles =  (fixAmEl.parent()[0].id == 'titles');
 
             if ((ev.target.attributes.name.nodeValue == 'fixed_amount') && (!isTitles)) {
-                console.log('target',ev.target.attributes.name.nodeValue);
+
                 // if (!fixAmEl.hasClass('is-input')) {
-                console.log('============ not is-input');
+              
                 var extInput = fixAmEl.find('input');
                 if (extInput.length==0) {
                   var innerText = fixAmEl.text();

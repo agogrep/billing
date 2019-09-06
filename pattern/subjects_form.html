@@ -9,9 +9,9 @@
 
          <div class ="formtabs">
           <ul>
-            <li><a href="#basic">basic</a></li>
-            <li><a href="#accounts">accounts</a></li>
-            <li><a href="#budget">budget</a></li>
+            <li><a class = "lang" href="#basic">basic</a></li>
+            <li><a class = "lang" href="#accounts">accounts</a></li>
+            <li><a class = "lang" href="#budget">budget</a></li>
           </ul>
           <div id="basic">
               <div name="sid" class="main master autolabel infofield"  type="number" >{sid}</div>
@@ -81,12 +81,12 @@
                         data-relationship = '#sublabels'>
                 <svg><use xlink:href="/file/ico/sprite.svg#three-point"></use></svg>
                 </div>
-                <div class = 'selectionbox-label flup'>sublabels</div>
+                <div class = 'selectionbox-label lang flup'>sublabels</div>
                 <div id = 'sublabels' class='form'>
                    <div class='sublabels row formsection' name = 'row'>
                       <div name="ssid" class = 'sublabels hidfeild' >{ssid}</div>
                       <div name="slid" class = 'sublabels dialog ' data-typedialog = 'form' data-href='/sublabels_form/?slid={slid}' >{slid}</div>
-                      <div name="slname" class = 'sublabels lang' >{slname}</div>
+                      <div name="slname" class = 'sublabels' >{slname}</div>
                    </div>
                </div>
               </div>
