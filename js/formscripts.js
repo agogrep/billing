@@ -113,19 +113,6 @@ var subjects_form = {
             var lnk = 'is_deleted = 0 && sid = '+sid;
             accJourEl.journal('option','links',lnk);
           }
-
-          // \s+sid\s=\s\d+
-          // var t = /\s+sid\s=\s\d+/;
-          // if (t.test(links)) {
-          //   links.replace(t,'sid = '+sid);
-          // }else{
-          //   if (links) {
-          //     accJourEl.journal('option','links',links + ' && '+'sid = '+sid);
-          //   }else{
-          //     accJourEl.journal('option','links','is_deleted = 0 && '+'sid = '+sid);
-          //   }
-          // }
-
           accJourEl.journal('applyFilter',0);
           this.element.find('#accounts #new-element').data({importData:detDataForAcc});
 
@@ -134,25 +121,10 @@ var subjects_form = {
 
           var bugJourEl = thisEl.find('#budget .journal');
           var links = bugJourEl.journal('option','links');
-          // console.log('links ===========',links);
           if (! links) {
             var lnk = 'is_deleted = 0 && ( budgetrules.source@accounts.sid = '+sid+' || budgetrules.dest@accounts.sid = '+sid+' )';
             bugJourEl.journal('option','links',lnk);
           }
-
-
-          // \s+sid\s=\s\d+
-          // var t = /budgetrules.\w+@accounts.sid\s=\s\d+/;
-          // if (t.test(links)) {
-          //
-          //   links.replace(t,'sid = '+sid);
-          // }else{
-          //   if (links) {
-          //     bugJourEl.journal('option','links',links + ' && '+'sid = '+sid);
-          //   }else{
-          //     bugJourEl.journal('option','links','is_deleted = 0 && '+'sid = '+sid);
-          //   }
-          // }
 
           bugJourEl.journal('applyFilter',0);
         }
